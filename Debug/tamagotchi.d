@@ -131,7 +131,8 @@ tamagotchi.o: tamagotchi.cpp \
  C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/libraries/EduBPMKII_Screen/Terminal12e.h \
  C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/libraries/EduBPMKII_Screen/Terminal6e.h \
  C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/libraries/EduBPMKII_Screen/Terminal8e.h \
- C:/ti/workspace/tamagotchi/Energia_logo_100_132.h
+ C:/ti/workspace/tamagotchi/Energia_logo_100_132.h \
+ C:/ti/workspace/tamagotchi/images/pet_models.h
 
 C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/cores/msp432r/ti/runtime/wiring/Energia.h:
 
@@ -398,3 +399,5 @@ C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/l
 C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/libraries/EduBPMKII_Screen/Terminal8e.h:
 
 C:/ti/workspace/tamagotchi/Energia_logo_100_132.h:
+
+C:/ti/workspace/tamagotchi/images/pet_models.h:

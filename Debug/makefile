@@ -149,8 +149,8 @@ all: $(OBJS) $(GEN_CMDS)
 	@$(MAKE) --no-print-directory -Onone "tamagotchi.out" secondary-outputs
 
 dependents:
-	-cd C:/ti/workspace/msp432r_MSP-EXP432P401R_core/Debug && $(MAKE) clean all
-	-cd C:/ti/workspace/msp432r_MSP-EXP432P401R_EduBPMKII_Screen/Debug && $(MAKE) clean all
+	-cd C:/ti/workspace/msp432r_MSP-EXP432P401R_core/Debug && $(MAKE) all
+	-cd C:/ti/workspace/msp432r_MSP-EXP432P401R_EduBPMKII_Screen/Debug && $(MAKE) all
 
 # Tool invocations
 tamagotchi.out: $(OBJS) $(GEN_CMDS) C:/ti/workspace/msp432r_MSP-EXP432P401R_core/Debug/libmsp432r_MSP-EXP432P401R_core.a C:/ti/workspace/msp432r_MSP-EXP432P401R_EduBPMKII_Screen/Debug/libmsp432r_MSP-EXP432P401R_EduBPMKII_Screen.a

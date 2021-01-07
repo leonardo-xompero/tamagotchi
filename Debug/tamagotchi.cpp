@@ -32,8 +32,10 @@
 void drawBitmap(const unsigned char *bmp);
 void life();
 bool menu();
+void menu_pet();
 void setup();
 void loop();
+void WDT_A_IRQHandler(void);
 
 #line 29
 Screen_HX8353E myScreen;
@@ -122,9 +124,9 @@ void drawBitmap(const unsigned char *bmp)
 
 void life()
 {
+    sprintf(string, "Health : %03d", life_pet);
+    myScreen.gText(30, 100, string, greenColour, 1, 1);
     life_pet--;
-    sprintf(string, "%d", life_pet);
-    myScreen.gText(30, 120, string, greenColour, orangeColour, 1, 1);
     delay(1000);
 }
 
@@ -171,6 +173,42 @@ bool menu()
     }
 }
 
+void menu_pet()
+{
+    bool choiceY;
+    joystickYState = analogRead(joystickY);
+    joystickYState = map(joystickYState, 0, 4096, 0, 255);
+    if (joystickYState > 60)
+    {
+        choiceY = false;
+    }
+    else if (joystickYState < 10)
+    {
+        choiceY = true;
+    }
+    switch (choiceY)
+    {
+    case false:
+        myScreen.gText(30, 5, "play", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 120, "eat", greenColour, blackColour, 1, 1);
+        break;
+    case true:
+        myScreen.gText(30, 5, "play", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 120, "eat", greenColour, orangeColour, 1, 1);
+        break;
+    }
+    buttonOneState = digitalRead(buttonOne);
+    if (buttonOneState == LOW && !menu_step)
+    {
+
+    }
+    else if (buttonOneState == LOW && menu_step)
+    {
+
+    }
+
+}
+
 
 void setup()
 {
@@ -183,12 +221,12 @@ void setup()
     if (menu())
     {
         myScreen.clear(blackColour);
-        choice = true;
+        drawBitmap(bmp);
     }
     else
     {
         myScreen.clear(blackColour);
-        choice = false;
+        drawBitmap(nc_bmp);
     }
 
 }
@@ -197,16 +235,12 @@ void setup()
 void loop()
 {
     life();
-    if (choice)
-    {
-        drawBitmap(bmp);
-    }
-    else
-    {
-        drawBitmap(nc_bmp);
-    }
 }
 
+void WDT_A_IRQHandler(void)
+{
+    menu_pet();
+}
 
 
 

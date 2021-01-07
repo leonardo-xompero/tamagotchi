@@ -161,41 +161,6 @@ bool menu()
     }
 }
 
-void menu_pet()
-{
-    bool choiceY;
-    joystickYState = analogRead(joystickY);
-    joystickYState = map(joystickYState, 0, 4096, 0, 255);
-    if (joystickYState > 60)
-    {
-        choiceY = false;
-    }
-    else if (joystickYState < 10)
-    {
-        choiceY = true;
-    }
-    switch (choiceY)
-    {
-    case false:
-        myScreen.gText(30, 5, "play", greenColour, orangeColour, 1, 1);
-        myScreen.gText(30, 120, "eat", greenColour, blackColour, 1, 1);
-        break;
-    case true:
-        myScreen.gText(30, 5, "play", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 120, "eat", greenColour, orangeColour, 1, 1);
-        break;
-    }
-    buttonOneState = digitalRead(buttonOne);
-    if (buttonOneState == LOW && !menu_step)
-    {
-
-    }
-    else if (buttonOneState == LOW && menu_step)
-    {
-
-    }
-
-}
 
 // Add setup code
 void setup()
@@ -225,7 +190,3 @@ void loop()
     life();
 }
 
-void WDT_A_IRQHandler(void)
-{
-    menu_pet();
-}

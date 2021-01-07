@@ -20,13 +20,21 @@
 /* magic insertion point 769d20fcd7a0eedaf64270f591438b01 */
 extern void setup();
 extern void loop();
+extern void menu_pet_x_setup();
+extern void menu_pet_x_loop();
+extern void menu_pet_y_setup();
+extern void menu_pet_y_loop();
 
-#define NUM_SKETCHES 1
+#define NUM_SKETCHES 3
 void (*func_ptr[NUM_SKETCHES][2])(void) = {
-	{setup, loop}
+	{setup, loop},
+	{menu_pet_x_setup, menu_pet_x_loop},
+	{menu_pet_y_setup, menu_pet_y_loop}
 };
 const char *taskNames[] = {
-	"loop"
+	"loop",
+	"menu_pet_x_loop",
+	"menu_pet_y_loop"
 };
 
 Void the_task(UArg _task_setup, UArg _task_loop);

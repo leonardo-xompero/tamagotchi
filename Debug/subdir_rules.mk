@@ -12,6 +12,20 @@ SHELL = cmd.exe
 	@echo 'Finished building: "$<"'
 	@echo ' '
 
+pet_menu_x.null: ../pet_menu_x.ino
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Resource Custom Build Step'
+	
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+pet_menu_y.null: ../pet_menu_y.ino
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Resource Custom Build Step'
+	
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
 build-272851377:
 	@$(MAKE) --no-print-directory -Onone -f subdir_rules.mk build-272851377-inproc
 

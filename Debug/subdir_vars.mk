@@ -10,6 +10,8 @@ CPP_SRCS += \
 ./main.cpp 
 
 INO_SRCS += \
+../pet_menu_x.ino \
+../pet_menu_y.ino \
 ../tamagotchi.ino 
 
 C_SRCS += \

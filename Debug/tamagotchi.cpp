@@ -27,21 +27,44 @@
 #include <Terminal12e.h>
 #include <Terminal6e.h>
 #include <Terminal8e.h>
+
+#include "images/pet_models.h"
 void drawBitmap(const unsigned char *bmp);
+void life();
+bool menu();
 void setup();
 void loop();
 
-#line 27
+#line 29
 Screen_HX8353E myScreen;
 
 
-uint32_t chrono;
 
-#include "Energia_logo_100_132.h"
-#include "images/pet_models.h"
+#define x_image 64
+#define y_image 64
 
-#define x_image 128
-#define y_image 128
+const int buttonOne = 33;     
+const int buttonTwo = 32;     
+const int ledGreen = 38;      
+const int ledBlue = 37;      
+const int ledRed = 39;        
+
+const int joystickSel = 5;     
+const int joystickX = 2;       
+const int joystickY = 26;     
+
+
+int buttonOneState = 0;         
+int buttonTwoState = 0;         
+
+int joystickSelState = 0;      
+int joystickXState, joystickYState;
+
+int life_pet = 100;
+char string[10];
+bool menu_step = false;
+bool choice;
+
 
 void drawBitmap(const unsigned char *bmp)
 {
@@ -97,15 +120,92 @@ void drawBitmap(const unsigned char *bmp)
 }
 
 
-void setup() {
+void life()
+{
+    life_pet--;
+    sprintf(string, "%d", life_pet);
+    myScreen.gText(30, 120, string, greenColour, orangeColour, 1, 1);
+    delay(1000);
+}
+
+
+bool menu()
+{
+    
+    for (;;)
+    {
+        joystickYState = analogRead(joystickY);
+        joystickYState = map(joystickYState, 0, 4096, 0, 255);
+        if (joystickYState > 60)
+        {
+            menu_step = false;
+        }
+        else if (joystickYState < 10)
+        {
+            menu_step = true;
+        }
+        switch (menu_step)
+        {
+        case false:
+            myScreen.gText(30, 5, "colored pet", greenColour, orangeColour, 1,
+                           1);
+            myScreen.gText(30, 20, "uncolored pet", greenColour, blackColour, 1,
+                           1);
+            break;
+        case true:
+            myScreen.gText(30, 5, "colored pet", greenColour, blackColour, 1,
+                           1);
+            myScreen.gText(30, 20, "uncolored pet", greenColour, orangeColour,
+                           1, 1);
+            break;
+        }
+        buttonOneState = digitalRead(buttonOne);
+        if (buttonOneState == LOW && !menu_step)
+        {
+            return true;
+        }
+        else if (buttonOneState == LOW && menu_step)
+        {
+            return false;
+        }
+    }
+}
+
+
+void setup()
+{
     myScreen.begin();
+
+    pinMode(joystickSel, INPUT_PULLUP);
+    
+    pinMode(buttonOne, INPUT_PULLUP);
+
+    if (menu())
+    {
+        myScreen.clear(blackColour);
+        choice = true;
+    }
+    else
+    {
+        myScreen.clear(blackColour);
+        choice = false;
+    }
+
 }
 
 
-void loop() {
-    drawBitmap(bmp);
+void loop()
+{
+    life();
+    if (choice)
+    {
+        drawBitmap(bmp);
+    }
+    else
+    {
+        drawBitmap(nc_bmp);
+    }
 }
-
 
 
 

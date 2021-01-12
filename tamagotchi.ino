@@ -37,6 +37,8 @@ opt3001 opt3001;
 //size of the image
 #define x_image 64
 #define y_image 64
+//limit of light value to change background
+#define LIGHT_LIMIT 50
 
 const int buttonOne = 33;     // the number of the pushbutton pin
 const int buttonTwo = 32;     // the number of the pushbutton pin
@@ -73,8 +75,10 @@ int buzzerPin = 40;
 float fTemp;
 char temp[10];
 
-bool blackLight=true;
-bool whiteLight=false;
+//variables for checking the background
+int blackLight=1;
+int whiteLight=0;
+
 
 void beep(int note, int duration)
 {
@@ -240,19 +244,20 @@ void light(){
   myScreen.gText(30, 110, temp, greenColour, 1, 1);
 
   //sequence to check if there's some obstruction of the light
-  if(blackLight && whiteLight && readings<50){
+  if(blackLight==1 && whiteLight==0 && readings<LIGHT_LIMIT){
     myScreen.clear(whiteColour);
-    drawBitmap(bmp);
-    blackLight=false;
-    whiteLight=true;
+    if(choice) drawBitmap(bmp);
+    else drawBitmap(nc_bmp);
+    blackLight=0;
+    whiteLight=1;
   }
-  else if(!blackLight && whiteLight && readings>=50){
+  else if(blackLight==0 && whiteLight==1 && readings>=LIGHT_LIMIT){
     myScreen.clear(blackColour);
-    drawBitmap(bmp);
-    blackLight=true;
-    whiteLight=false;
+    if(choice) drawBitmap(bmp);
+    else drawBitmap(nc_bmp);
+    blackLight=1;
+    whiteLight=0;
   }
-  
   delay(100);
 }
 
@@ -323,13 +328,14 @@ void setup()
   {
     myScreen.clear(blackColour);
     drawBitmap(bmp);
+    choice=true;
   }
   else
   {
     myScreen.clear(blackColour);
     drawBitmap(nc_bmp);
+    choice=false;
   }
-
 }
 
 // Add loop code

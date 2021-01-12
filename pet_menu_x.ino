@@ -73,7 +73,7 @@ void menu_pet_x()
 // Add setup code
 void menu_pet_x_setup()
 {
-
+  
 }
 
 // Add loop code

@@ -28,7 +28,7 @@
 #define y_image 64
 int choiceX;
 
-void menu_pet_x()
+void menu_pet()
 {
 
     joystickXState = analogRead(joystickX);
@@ -46,16 +46,16 @@ void menu_pet_x()
     switch (choiceX)
     {
     case 0:
-        myScreen.gText(5, 64, "walk", greenColour, orangeColour, 1, 1);
-        myScreen.gText(100, 64, "sleep", greenColour, blackColour, 1, 1);
+        myScreen.gText(20, 110, "walk", greenColour, orangeColour, 1, 1);
+        myScreen.gText(70, 110, "sleep", greenColour, blackColour, 1, 1);
         break;
     case 1:
-        myScreen.gText(5, 64, "walk", greenColour, blackColour, 1, 1);
-        myScreen.gText(100, 64, "sleep", greenColour, orangeColour, 1, 1);
+        myScreen.gText(20, 110, "walk", greenColour, blackColour, 1, 1);
+        myScreen.gText(70, 110, "sleep", greenColour, orangeColour, 1, 1);
         break;
     case 2:
-        myScreen.gText(5, 64, "walk", greenColour, blackColour, 1, 1);
-        myScreen.gText(100, 64, "sleep", greenColour, blackColour, 1, 1);
+        myScreen.gText(20, 110, "walk", greenColour, blackColour, 1, 1);
+        myScreen.gText(70, 110, "sleep", greenColour, blackColour, 1, 1);
         break;
     }
     buttonOneState = digitalRead(buttonOne);
@@ -71,13 +71,16 @@ void menu_pet_x()
 }
 
 // Add setup code
-void menu_pet_x_setup()
+void menu_pet_setup()
 {
-  
+    
 }
 
 // Add loop code
-void menu_pet_x_loop()
+void menu_pet_loop()
 {
-    menu_pet_x();
+  //if i made the choice in the menu, then i can start the task
+  if(goMenu){
+    menu_pet();
+  }
 }

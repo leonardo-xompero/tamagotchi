@@ -79,6 +79,8 @@ char temp[10];
 int blackLight=1;
 int whiteLight=0;
 
+//boolen to make pet_menu start
+bool goMenu=false;
 
 void beep(int note, int duration)
 {
@@ -214,7 +216,7 @@ void life()
     float diet = tmp006.readDieTempC();
   */
   sprintf(string, "Health : %03d", life_pet);
-  myScreen.gText(30, 100, string, greenColour, 1, 1);
+  myScreen.gText(30, 20, string, greenColour, 1, 1);
 
 
   /*
@@ -240,8 +242,8 @@ void light(){
   analogWrite(backlightPin, backlight);
   
   
-  sprintf(temp, "Light : %03d", readings);
-  myScreen.gText(30, 110, temp, greenColour, 1, 1);
+  sprintf(temp, "Light : %03d", readings); //doesn't work without that (don't know why, to check later)
+  //myScreen.gText(30, 110, temp, greenColour, 1, 1);
 
   //sequence to check if there's some obstruction of the light
   if(blackLight==1 && whiteLight==0 && readings<LIGHT_LIMIT){
@@ -336,6 +338,7 @@ void setup()
     drawBitmap(nc_bmp);
     choice=false;
   }
+  goMenu=true;
 }
 
 // Add loop code

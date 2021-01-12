@@ -79,15 +79,6 @@
 							<tool id="com.ti.ccstudio.buildDefinitions.MSP432_20.2.hex.2076341249" name="ARM Hex Utility" superClass="com.ti.ccstudio.buildDefinitions.MSP432_20.2.hex"/>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.ti.ccstudio.buildDefinitions.MSP432.Debug.1833875815.pet_menu_x.ino" name="pet_menu_x.ino" rcbsApplicability="override" resourcePath="pet_menu_x.ino" toolsToInvoke="org.eclipse.cdt.managedbuilder.ui.rcbs.226750379">
-						<tool id="com.ti.ccstudio.buildDefinitions.MSP432_20.2.exe.compilerDebug.1096375333.631693341" name="ARM Compiler" superClass="com.ti.ccstudio.buildDefinitions.MSP432_20.2.exe.compilerDebug.1096375333">
-							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__C_SRCS.2111871177" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__C_SRCS"/>
-							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__CPP_SRCS.1273046919" name="C++ Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__CPP_SRCS"/>
-							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__ASM_SRCS.1841072510" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__ASM_SRCS"/>
-							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__ASM2_SRCS.2048634727" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__ASM2_SRCS"/>
-						</tool>
-						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.226750379" name="Resource Custom Build Step"/>
-					</fileInfo>
 					<fileInfo id="com.ti.ccstudio.buildDefinitions.MSP432.Debug.1833875815.tamagotchi.ino" name="tamagotchi.ino" rcbsApplicability="override" resourcePath="tamagotchi.ino" toolsToInvoke="org.eclipse.cdt.managedbuilder.ui.rcbs.656881079">
 						<tool id="com.ti.ccstudio.buildDefinitions.MSP432_20.2.exe.compilerDebug.1096375333.274333689" name="ARM Compiler" superClass="com.ti.ccstudio.buildDefinitions.MSP432_20.2.exe.compilerDebug.1096375333">
 							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__C_SRCS.1938756586" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__C_SRCS"/>
@@ -98,6 +89,15 @@
 						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.656881079" name="Resource Custom Build Step">
 							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.1515994731" name="Resource Custom Build Step Output Type" outputNames="tamagotchi.cpp; main.cpp"/>
 						</tool>
+					</fileInfo>
+					<fileInfo id="com.ti.ccstudio.buildDefinitions.MSP432.Debug.1833875815.pet_menu_x.ino" name="pet_menu_x.ino" rcbsApplicability="override" resourcePath="pet_menu.ino" toolsToInvoke="org.eclipse.cdt.managedbuilder.ui.rcbs.226750379">
+						<tool id="com.ti.ccstudio.buildDefinitions.MSP432_20.2.exe.compilerDebug.1096375333.631693341" name="ARM Compiler" superClass="com.ti.ccstudio.buildDefinitions.MSP432_20.2.exe.compilerDebug.1096375333">
+							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__C_SRCS.2111871177" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__C_SRCS"/>
+							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__CPP_SRCS.1273046919" name="C++ Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__CPP_SRCS"/>
+							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__ASM_SRCS.1841072510" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__ASM_SRCS"/>
+							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__ASM2_SRCS.2048634727" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_20.2.compiler.inputType__ASM2_SRCS"/>
+						</tool>
+						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.226750379" name="Resource Custom Build Step"/>
 					</fileInfo>
 					<sourceEntries>
 						<entry excluding="Debug/tamagotchi.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
@@ -227,15 +227,6 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.ti.ccstudio.buildDefinitions.MSP432.Release.643342794.pet_menu_x.ino" name="pet_menu_x.ino" rcbsApplicability="override" resourcePath="pet_menu_x.ino" toolsToInvoke="org.eclipse.cdt.managedbuilder.ui.rcbs.945354891">
-						<tool id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.exe.compilerRelease.2036252354.806257663" name="GNU Compiler" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.exe.compilerRelease.2036252354">
-							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__C_SRCS.974186054" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__C_SRCS"/>
-							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__CPP_SRCS.1423899473" name="C++ Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__CPP_SRCS"/>
-							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM_SRCS.1944919260" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM_SRCS"/>
-							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM2_SRCS.194757896" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM2_SRCS"/>
-						</tool>
-						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.945354891" name="Resource Custom Build Step"/>
-					</fileInfo>
 					<fileInfo id="com.ti.ccstudio.buildDefinitions.MSP432.Release.643342794.tamagotchi.ino" name="tamagotchi.ino" rcbsApplicability="override" resourcePath="tamagotchi.ino" toolsToInvoke="org.eclipse.cdt.managedbuilder.ui.rcbs.601114922.1652106706">
 						<tool id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.exe.compilerRelease.2036252354.807880500" name="GNU Compiler" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.exe.compilerRelease.2036252354">
 							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__C_SRCS.2035879867" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__C_SRCS"/>
@@ -246,6 +237,15 @@
 						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.601114922.1652106706" name="Resource Custom Build Step">
 							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.796051942.531642054" name="Resource Custom Build Step Output Type" outputNames="tamagotchi.cpp; main.cpp"/>
 						</tool>
+					</fileInfo>
+					<fileInfo id="com.ti.ccstudio.buildDefinitions.MSP432.Release.643342794.pet_menu_x.ino" name="pet_menu_x.ino" rcbsApplicability="override" resourcePath="pet_menu.ino" toolsToInvoke="org.eclipse.cdt.managedbuilder.ui.rcbs.945354891">
+						<tool id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.exe.compilerRelease.2036252354.806257663" name="GNU Compiler" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.exe.compilerRelease.2036252354">
+							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__C_SRCS.974186054" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__C_SRCS"/>
+							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__CPP_SRCS.1423899473" name="C++ Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__CPP_SRCS"/>
+							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM_SRCS.1944919260" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM_SRCS"/>
+							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM2_SRCS.194757896" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM2_SRCS"/>
+						</tool>
+						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.945354891" name="Resource Custom Build Step"/>
 					</fileInfo>
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
@@ -383,15 +383,6 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.ti.ccstudio.buildDefinitions.MSP432.Debug.1978143595.pet_menu_x.ino" name="pet_menu_x.ino" rcbsApplicability="override" resourcePath="pet_menu_x.ino" toolsToInvoke="org.eclipse.cdt.managedbuilder.ui.rcbs.2117060551.1126044878">
-						<tool id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.exe.compilerDebug.614878533" name="GNU Compiler" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.exe.compilerDebug.1447876022">
-							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__C_SRCS.572428584" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__C_SRCS"/>
-							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__CPP_SRCS.688927799" name="C++ Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__CPP_SRCS"/>
-							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM_SRCS.234866978" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM_SRCS"/>
-							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM2_SRCS.2118460655" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM2_SRCS"/>
-						</tool>
-						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.2117060551.1126044878" name="Resource Custom Build Step"/>
-					</fileInfo>
 					<fileInfo id="com.ti.ccstudio.buildDefinitions.MSP432.Debug.1978143595.tamagotchi.ino" name="tamagotchi.ino" rcbsApplicability="override" resourcePath="tamagotchi.ino" toolsToInvoke="org.eclipse.cdt.managedbuilder.ui.rcbs.240187323.844478297.39254966">
 						<tool id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.exe.compilerDebug.1195888406" name="GNU Compiler" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.exe.compilerDebug.1447876022">
 							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__C_SRCS.2012922563" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__C_SRCS"/>
@@ -402,6 +393,15 @@
 						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.240187323.844478297.39254966" name="Resource Custom Build Step">
 							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.1757077150.159103813.446908082" name="Resource Custom Build Step Output Type" outputNames="tamagotchi.cpp; main.cpp"/>
 						</tool>
+					</fileInfo>
+					<fileInfo id="com.ti.ccstudio.buildDefinitions.MSP432.Debug.1978143595.pet_menu_x.ino" name="pet_menu_x.ino" rcbsApplicability="override" resourcePath="pet_menu.ino" toolsToInvoke="org.eclipse.cdt.managedbuilder.ui.rcbs.2117060551.1126044878">
+						<tool id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.exe.compilerDebug.614878533" name="GNU Compiler" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.exe.compilerDebug.1447876022">
+							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__C_SRCS.572428584" name="C Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__C_SRCS"/>
+							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__CPP_SRCS.688927799" name="C++ Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__CPP_SRCS"/>
+							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM_SRCS.234866978" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM_SRCS"/>
+							<inputType id="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM2_SRCS.2118460655" name="Assembly Sources" superClass="com.ti.ccstudio.buildDefinitions.MSP432_GNU_6.0.compiler.inputType__ASM2_SRCS"/>
+						</tool>
+						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.2117060551.1126044878" name="Resource Custom Build Step"/>
 					</fileInfo>
 					<sourceEntries>
 						<entry excluding="Debug/tamagotchi.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>

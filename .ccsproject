@@ -13,4 +13,5 @@
 	<ignoreDefaultDeviceSettings value="true"/>
 	<origin value="C:\ti\energia-1.8.10E23\examples\09.EducationalBP_MKII\LCD_screen_Logos\LCD_screen_Logos.ino"/>
 	<filesToOpen value="tamagotchi.ino"/>
+	<isTargetManual value="false"/>
 </projectOptions>

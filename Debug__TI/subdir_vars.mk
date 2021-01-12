@@ -15,16 +15,16 @@ INO_SRCS += \
 ../tamagotchi.ino 
 
 OBJS += \
-./tamagotchi.o \
-./main.o 
+./tamagotchi.obj \
+./main.obj 
 
 CPP_DEPS += \
 ./tamagotchi.d \
 ./main.d 
 
 OBJS__QUOTED += \
-"tamagotchi.o" \
-"main.o" 
+"tamagotchi.obj" \
+"main.obj" 
 
 CPP_DEPS__QUOTED += \
 "tamagotchi.d" \

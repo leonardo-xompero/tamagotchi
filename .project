@@ -5,6 +5,7 @@
 	<projects>
 		<project>msp432r_MSP-EXP432P401R_core</project>
 		<project>msp432r_MSP-EXP432P401R_EduBPMKII_Screen</project>
+		<project>msp432r_MSP-EXP432P401R_Adafruit_TMP006</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

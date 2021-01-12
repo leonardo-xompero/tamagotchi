@@ -9,8 +9,6 @@
 #include <ti/devices/msp432p4xx/inc/msp.h>
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 #include <ti/grlib/grlib.h>
-#include "HAL_I2C.h"
-#include "HAL_TMP006.h"
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>

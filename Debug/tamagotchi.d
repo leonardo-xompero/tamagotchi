@@ -117,8 +117,6 @@ tamagotchi.o: tamagotchi.cpp \
  C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/source/ti/devices/msp432p4xx/driverlib/sysctl.h \
  C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/source/ti/devices/msp432p4xx/driverlib/flash.h \
  C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/source/ti/grlib/grlib.h \
- C:/ti/workspace/tamagotchi/HAL_I2C.h \
- C:/ti/workspace/tamagotchi/HAL_TMP006.h \
  C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/cores/msp432r/ti/runtime/wiring/SPI.h \
  C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/libraries/EduBPMKII_Screen/LCD_screen.h \
  C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/libraries/EduBPMKII_Screen/LCD_utilities.h \
@@ -131,7 +129,7 @@ tamagotchi.o: tamagotchi.cpp \
  C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/libraries/EduBPMKII_Screen/Terminal12e.h \
  C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/libraries/EduBPMKII_Screen/Terminal6e.h \
  C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/libraries/EduBPMKII_Screen/Terminal8e.h \
- C:/ti/workspace/tamagotchi/images/pet_models.h
+ C:/ti/workspace/tamagotchi/pet/pet_models.h
 
 C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/cores/msp432r/ti/runtime/wiring/Energia.h:
 
@@ -369,10 +367,6 @@ C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/s
 
 C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/source/ti/grlib/grlib.h:
 
-C:/ti/workspace/tamagotchi/HAL_I2C.h:
-
-C:/ti/workspace/tamagotchi/HAL_TMP006.h:
-
 C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/cores/msp432r/ti/runtime/wiring/SPI.h:
 
 C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/libraries/EduBPMKII_Screen/LCD_screen.h:
@@ -397,4 +391,4 @@ C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/l
 
 C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/libraries/EduBPMKII_Screen/Terminal8e.h:
 
-C:/ti/workspace/tamagotchi/images/pet_models.h:
+C:/ti/workspace/tamagotchi/pet/pet_models.h:

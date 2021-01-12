@@ -10,8 +10,6 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./HAL_I2C.o" \
-"./HAL_TMP006.o" \
 "./main.o" \
 "./tamagotchi.o" \
 $(GEN_CMDS__FLAG) \
@@ -25,6 +23,7 @@ $(GEN_CMDS__FLAG) \
 -lm \
 -lnosys \
 -lc \
+"C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/ccs/msp432p4xx_driverlib.lib" \
 -Wl,--end-group \
 
 -include ../makefile.init
@@ -151,12 +150,13 @@ all: $(OBJS) $(GEN_CMDS)
 dependents:
 	-cd C:/ti/workspace/msp432r_MSP-EXP432P401R_core/Debug && $(MAKE) all
 	-cd C:/ti/workspace/msp432r_MSP-EXP432P401R_EduBPMKII_Screen/Debug && $(MAKE) all
+	-cd C:/ti/workspace/msp432r_MSP-EXP432P401R_Adafruit_TMP006/Debug && $(MAKE) all
 
 # Tool invocations
-tamagotchi.out: $(OBJS) $(GEN_CMDS) C:/ti/workspace/msp432r_MSP-EXP432P401R_core/Debug/libmsp432r_MSP-EXP432P401R_core.a C:/ti/workspace/msp432r_MSP-EXP432P401R_EduBPMKII_Screen/Debug/libmsp432r_MSP-EXP432P401R_EduBPMKII_Screen.a
+tamagotchi.out: $(OBJS) $(GEN_CMDS) C:/ti/workspace/msp432r_MSP-EXP432P401R_core/Debug/libmsp432r_MSP-EXP432P401R_core.a C:/ti/workspace/msp432r_MSP-EXP432P401R_EduBPMKII_Screen/Debug/libmsp432r_MSP-EXP432P401R_EduBPMKII_Screen.a C:/ti/workspace/msp432r_MSP-EXP432P401R_Adafruit_TMP006/Debug/libmsp432r_MSP-EXP432P401R_Adafruit_TMP006.a
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: GNU Linker'
-	"C:/ti/energia_tool_arm-none-eabi-gcc_6.3.1-20170620/bin/arm-none-eabi-gcc-6.3.1.exe" -Dxdc_target_types__=gnu/targets/arm/std.h -Dxdc_target_name__=M4F -Dxdc_cfg__xheader__=\"configPkg/package/cfg/energia_pm4fg.h\" -DBOARD_MSP_EXP432P401R -Dxdc__nolocalstring=1 -D__MSP432P401R__ -DCORE_VERSION=5252 -DF_CPU=48000000L -DENERGIA_MSP_EXP432P401R -DENERGIA_ARCH_MSP432R -D_DEFAULT_SOURCE -DENERGIA=23 -DARDUINO=10610 -Os -ffunction-sections -fdata-sections -g -gdwarf-3 -gstrict-dwarf -w -Wall -mabi=aapcs -march=armv7e-m -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -Wl,-Map,"tamagotchi.map" -nostartfiles -Wl,--gc-sections -L"C:/ti/workspace/msp432r_MSP-EXP432P401R_EduBPMKII_Screen/Debug" -L"C:/ti/workspace/msp432r_MSP-EXP432P401R_core/Debug" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/kernel/tirtos/packages/gnu/targets/arm/libs/install-native/arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/cores/msp432r" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/energia" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/kernel" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/source" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/kernel/tirtos/builds/MSP_EXP432P401R/energia/" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/kernel/tirtos/packages" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/cores/msp432r/ti/runtime/wiring/msp432" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/cores/msp432r/ti/runtime/wiring/msp432/variants/MSP_EXP432P401R" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/source/ti/devices/msp432p4xx/driverlib/gcc" -Wl,--undefined,main -Wl,--undefined,_printf_float -Wl,--undefined,_scanf_float -Os -specs=nano.specs -specs=rdimon.specs -specs=nosys.specs -Wl,--check-sections -o"tamagotchi.out" $(ORDERED_OBJS)
+	"C:/ti/energia_tool_arm-none-eabi-gcc_6.3.1-20170620/bin/arm-none-eabi-gcc-6.3.1.exe" -Dxdc_target_types__=gnu/targets/arm/std.h -Dxdc_target_name__=M4F -Dxdc_cfg__xheader__=\"configPkg/package/cfg/energia_pm4fg.h\" -DBOARD_MSP_EXP432P401R -Dxdc__nolocalstring=1 -D__MSP432P401R__ -DCORE_VERSION=5252 -DF_CPU=48000000L -DENERGIA_MSP_EXP432P401R -DENERGIA_ARCH_MSP432R -D_DEFAULT_SOURCE -DENERGIA=23 -DARDUINO=10610 -Os -ffunction-sections -fdata-sections -g -gdwarf-3 -gstrict-dwarf -w -Wall -mabi=aapcs -march=armv7e-m -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -Wl,-Map,"tamagotchi.map" -nostartfiles -Wl,--gc-sections -L"C:/ti/workspace/tamagotchi" -L"C:/ti/workspace/msp432r_MSP-EXP432P401R_EduBPMKII_Screen/Debug" -L"C:/ti/workspace/msp432r_MSP-EXP432P401R_core/Debug" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/kernel/tirtos/packages/gnu/targets/arm/libs/install-native/arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/cores/msp432r" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/energia" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/kernel" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/source" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/kernel/tirtos/builds/MSP_EXP432P401R/energia/" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/kernel/tirtos/packages" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/cores/msp432r/ti/runtime/wiring/msp432" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/cores/msp432r/ti/runtime/wiring/msp432/variants/MSP_EXP432P401R" -L"C:/Users/inca/AppData/Local/Energia15/packages/energia/hardware/msp432r/5.29.0/system/source/ti/devices/msp432p4xx/driverlib/gcc" -Wl,--undefined,main -Wl,--undefined,_printf_float -Wl,--undefined,_scanf_float -Os -specs=nano.specs -specs=rdimon.specs -specs=nosys.specs -Wl,--check-sections -o"tamagotchi.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
@@ -170,8 +170,7 @@ tamagotchi.bin: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "HAL_I2C.o" "HAL_TMP006.o" "tamagotchi.o" "main.o" 
-	-$(RM) "HAL_I2C.d" "HAL_TMP006.d" 
+	-$(RM) "tamagotchi.o" "main.o" 
 	-$(RM) "tamagotchi.d" "main.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
@@ -182,6 +181,7 @@ secondary-outputs: $(BIN_OUTPUTS)
 .SECONDARY:
 C:/ti/workspace/msp432r_MSP-EXP432P401R_core/Debug/libmsp432r_MSP-EXP432P401R_core.a:
 C:/ti/workspace/msp432r_MSP-EXP432P401R_EduBPMKII_Screen/Debug/libmsp432r_MSP-EXP432P401R_EduBPMKII_Screen.a:
+C:/ti/workspace/msp432r_MSP-EXP432P401R_Adafruit_TMP006/Debug/libmsp432r_MSP-EXP432P401R_Adafruit_TMP006.a:
 
 -include ../makefile.targets
 

@@ -24,9 +24,9 @@
 #include <Terminal8e.h>
 // Define variables and constants
 //size of the image
-#define x_image 64
-#define y_image 64
-int choiceX;
+#define CHOICE_INF 0
+#define CHOICE_SUP 2
+int choiceX=0;
 
 //function for return the previous menu
 void return_menu(){
@@ -45,43 +45,53 @@ void menu_pet()
     if (joystickYState > 60)
     {
       beep(NOTE_C6, 125);  
-      choiceX = 0;
+      //choiceX = 0;
+      if(choiceX>CHOICE_INF){
+        choiceX--;
+        delay(10);
+      }
     }
     else if (joystickYState < 10)
     {
       beep(NOTE_C6, 125); 
-      choiceX = 1;
+      //choiceX = 1;
+      if(choiceX<CHOICE_SUP){
+        choiceX++;
+        delay(10);
+      }
     }
     switch (choiceX)
     {
     case 0:
         myScreen.gText(30, 30, "walk", greenColour, orangeColour, 1, 1);
-        myScreen.gText(30, 60, "exit", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 70, "exit", greenColour, blackColour, 1, 1);
         break;
     case 1:
         myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 60, "exit", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 50, "sleep", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 70, "exit", greenColour, blackColour, 1, 1);
         break;
-        /*
+        
     case 2:
-        myScreen.gText(30, 110, "walk", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 110, "sleep", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 70, "exit", greenColour, orangeColour, 1, 1);
         break;
-        */
+        
     }
     buttonOneState = digitalRead(buttonOne);
-    buttonTwoState = digitalRead(buttonTwo);
+    
     if (buttonOneState == LOW && choiceX == 0)
     {
     }
-    else if (buttonOneState == LOW && choiceX == 1)
+    else if (buttonOneState == LOW && choiceX == 2)
     {      
       return_menu();
       choiceX=0;
       busyMenu=false;
       break;
     }
-      
   }
 }
 

@@ -23,9 +23,10 @@
 #include <Terminal6e.h>
 #include <Terminal8e.h>
 // Define variables and constants
-//size of the image
+//lower limit of the choices
 #define CHOICE_INF 0
-#define CHOICE_SUP 2
+//unper bound of the choice (the value is #choices-1)
+#define CHOICE_SUP 4
 int choiceX=0;
 
 //function for return the previous menu
@@ -62,19 +63,42 @@ bool menu_pet()
     case 0:
         myScreen.gText(30, 30, "walk", greenColour, orangeColour, 1, 1);
         myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 70, "exit", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 70, "eat", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 90, "play", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 110, "exit", greenColour, blackColour, 1, 1);
         break;
+        
     case 1:
         myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 50, "sleep", greenColour, orangeColour, 1, 1);
-        myScreen.gText(30, 70, "exit", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 70, "eat", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 90, "play", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 110, "exit", greenColour, blackColour, 1, 1);
         break;
         
     case 2:
         myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 70, "exit", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 70, "eat", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 90, "play", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 110, "exit", greenColour, blackColour, 1, 1);
         break;      
+
+    case 3:
+        myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 70, "eat", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 90, "play", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 110, "exit", greenColour, blackColour, 1, 1);
+        break; 
+
+    case 4:
+        myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 70, "eat", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 90, "play", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 110, "exit", greenColour, orangeColour, 1, 1);
+        break; 
   }
   
   buttonOneState = digitalRead(buttonOne);
@@ -87,7 +111,7 @@ bool menu_pet()
       case 1:
           break;
           
-      case 2:
+      case 4:
           beep(NOTE_GS3, 125);  
           return_menu();
           choiceX=0;

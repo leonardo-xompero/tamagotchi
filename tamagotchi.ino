@@ -38,7 +38,8 @@ opt3001 opt3001;
 #define x_image 64
 #define y_image 64
 //limit of light value to change background
-#define LIGHT_LIMIT 50
+#define LIGHT_LIMIT 500
+#define LIFE_PET 200
 
 const int buttonOne = 33;     // the number of the pushbutton pin
 const int buttonTwo = 32;     // the number of the pushbutton pin
@@ -57,9 +58,11 @@ int buttonTwoState = 0;         // variable for reading the pushbutton #2 status
 int joystickSelState = 0;      // variable for reading the joystick sel status
 int joystickXState, joystickYState;
 
-int life_pet = 100;
+int life_pet = LIFE_PET;
 char string[10];
+//choice of the firs menu
 bool menu_step = false;
+//choice of the pet
 bool choice;
 
 //variables for the light sensor
@@ -72,8 +75,8 @@ const uint8_t brightestBacklight = 254;
 //pin for the buzzer
 int buzzerPin = 40;
 
-float fTemp;
-char temp[10];
+//float fTemp;
+char temp[8];
 
 //variables for checking the background
 int blackLight=1;
@@ -81,6 +84,8 @@ int whiteLight=0;
 
 //boolen to make pet_menu start
 bool goMenu=false;
+//semaphore to stop the life for the menu
+bool busyMenu=false;
 
 void beep(int note, int duration)
 {
@@ -233,7 +238,7 @@ void light(){
   uint8_t backlight = 0;
   // Variables
   unsigned long readings;
-     
+  temp[0]='\0';
   // Read OPT3001
   readings = opt3001.readResult();  //min = 0, max = 131040
   
@@ -242,7 +247,7 @@ void light(){
   analogWrite(backlightPin, backlight);
   
   
-  sprintf(temp, "Light : %03d", readings); //doesn't work without that (don't know why, to check later)
+  //sprintf(temp, "Light : %2d", readings); //doesn't work without that (don't know why, to check later)
   //myScreen.gText(30, 110, temp, greenColour, 1, 1);
 
   //sequence to check if there's some obstruction of the light
@@ -269,14 +274,14 @@ bool menu()
   //stay in the loop until the user makes a decision
   for (;;)
   {
-    joystickYState = analogRead(joystickY);
-    joystickYState = map(joystickYState, 0, 4096, 0, 255);
-    if (joystickYState > 60)
+    joystickXState = analogRead(joystickX);
+    joystickXState = map(joystickXState, 0, 4096, 0, 255);
+    if (joystickXState < 10)
     {
       beep(NOTE_C6, 125);  
       menu_step = false;
     }
-    else if (joystickYState < 10)
+    else if (joystickXState > 60)
     {
       beep(NOTE_C6, 125); 
       menu_step = true;
@@ -284,15 +289,15 @@ bool menu()
     switch (menu_step)
     {
       case false:
-        myScreen.gText(30, 5, "colored pet", greenColour, orangeColour, 1,
+        myScreen.gText(30, 30, "pet1", greenColour, orangeColour, 1,
                        1);
-        myScreen.gText(30, 20, "uncolored pet", greenColour, blackColour, 1,
+        myScreen.gText(80, 30, "pet2", greenColour, blackColour, 1,
                        1);
         break;
       case true:
-        myScreen.gText(30, 5, "colored pet", greenColour, blackColour, 1,
+        myScreen.gText(30, 30, "pet1", greenColour, blackColour, 1,
                        1);
-        myScreen.gText(30, 20, "uncolored pet", greenColour, orangeColour,
+        myScreen.gText(80, 30, "pet2", greenColour, orangeColour,
                        1, 1);
         break;
     }
@@ -344,7 +349,9 @@ void setup()
 // Add loop code
 void loop()
 {
-  //tmp006.begin();
-  life();
-  light();
+  //if the menu of the pet is not active, then i can use the light and the life
+  if(!busyMenu){
+    life();
+    light();
+  }
 }

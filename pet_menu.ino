@@ -28,46 +28,61 @@
 #define y_image 64
 int choiceX;
 
+//function for return the previous menu
+void return_menu(){
+  myScreen.clear(blackColour);
+  drawBitmap(bmp);
+  //loop();
+}
+
+//menu for the choice of the action of the pet
 void menu_pet()
 {
-
-    joystickXState = analogRead(joystickX);
-    joystickXState = map(joystickXState, 0, 4096, 0, 255);
-    if (joystickXState < 10)
+  myScreen.clear(blackColour);
+  for(;;){
+    joystickYState = analogRead(joystickY);
+    joystickYState = map(joystickYState, 0, 4096, 0, 255);
+    if (joystickYState > 60)
     {
-        choiceX = 0;
+      beep(NOTE_C6, 125);  
+      choiceX = 0;
     }
-    else if (joystickXState > 60)
+    else if (joystickYState < 10)
     {
-        choiceX = 1;
+      beep(NOTE_C6, 125); 
+      choiceX = 1;
     }
-    else
-        choiceX = 2;
     switch (choiceX)
     {
     case 0:
-        myScreen.gText(20, 110, "walk", greenColour, orangeColour, 1, 1);
-        myScreen.gText(70, 110, "sleep", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 30, "walk", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 60, "exit", greenColour, blackColour, 1, 1);
         break;
     case 1:
-        myScreen.gText(20, 110, "walk", greenColour, blackColour, 1, 1);
-        myScreen.gText(70, 110, "sleep", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 60, "exit", greenColour, orangeColour, 1, 1);
         break;
+        /*
     case 2:
-        myScreen.gText(20, 110, "walk", greenColour, blackColour, 1, 1);
-        myScreen.gText(70, 110, "sleep", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 110, "walk", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 110, "sleep", greenColour, blackColour, 1, 1);
         break;
+        */
     }
     buttonOneState = digitalRead(buttonOne);
-    if (buttonOneState == LOW && menu_step != 0)
+    buttonTwoState = digitalRead(buttonTwo);
+    if (buttonOneState == LOW && choiceX == 0)
     {
-
     }
-    else if (buttonOneState == LOW && menu_step == 1)
-    {
-
+    else if (buttonOneState == LOW && choiceX == 1)
+    {      
+      return_menu();
+      choiceX=0;
+      busyMenu=false;
+      break;
     }
-
+      
+  }
 }
 
 // Add setup code
@@ -81,6 +96,12 @@ void menu_pet_loop()
 {
   //if i made the choice in the menu, then i can start the task
   if(goMenu){
-    menu_pet();
+    
+    //life();
+    buttonTwoState=digitalRead(buttonTwo);
+    if(buttonTwoState==LOW){
+      busyMenu=true;
+      menu_pet();
+    }
   }
 }

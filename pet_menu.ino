@@ -32,36 +32,33 @@ int choiceX=0;
 void return_menu(){
   myScreen.clear(blackColour);
   drawBitmap(bmp);
-  //loop();
 }
 
 //menu for the choice of the action of the pet
-void menu_pet()
-{
-  myScreen.clear(blackColour);
-  for(;;){
-    joystickYState = analogRead(joystickY);
-    joystickYState = map(joystickYState, 0, 4096, 0, 255);
-    if (joystickYState > 60)
-    {
-      beep(NOTE_C6, 125);  
-      //choiceX = 0;
-      if(choiceX>CHOICE_INF){
-        choiceX--;
-        delay(10);
-      }
+bool menu_pet()
+{  
+  joystickYState = analogRead(joystickY);
+  joystickYState = map(joystickYState, 0, 4096, 0, 255);
+  if (joystickYState > 60)
+  {
+    beep(NOTE_C6, 125);  
+    //choiceX = 0;
+    if(choiceX>CHOICE_INF){
+      choiceX--;
+      delay(10);
     }
-    else if (joystickYState < 10)
-    {
-      beep(NOTE_C6, 125); 
-      //choiceX = 1;
-      if(choiceX<CHOICE_SUP){
-        choiceX++;
-        delay(10);
-      }
+  }
+  else if (joystickYState < 10)
+  {
+    beep(NOTE_C6, 125); 
+    //choiceX = 1;
+    if(choiceX<CHOICE_SUP){
+      choiceX++;
+      delay(10);
     }
-    switch (choiceX)
-    {
+  }
+  switch (choiceX)
+  {
     case 0:
         myScreen.gText(30, 30, "walk", greenColour, orangeColour, 1, 1);
         myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
@@ -77,22 +74,30 @@ void menu_pet()
         myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 70, "exit", greenColour, orangeColour, 1, 1);
-        break;
-        
-    }
-    buttonOneState = digitalRead(buttonOne);
+        break;      
+  }
+  
+  buttonOneState = digitalRead(buttonOne);
     
-    if (buttonOneState == LOW && choiceX == 0)
+  if(buttonOneState==LOW){
+    switch (choiceX)
     {
-    }
-    else if (buttonOneState == LOW && choiceX == 2)
-    {      
-      return_menu();
-      choiceX=0;
-      busyMenu=false;
-      break;
+      case 0:
+          break;
+      case 1:
+          break;
+          
+      case 2:
+          beep(NOTE_GS3, 125);  
+          return_menu();
+          choiceX=0;
+          busyMenu=false;
+          return false;
+          break;          
     }
   }
+    
+  return true;
 }
 
 // Add setup code
@@ -111,7 +116,9 @@ void menu_pet_loop()
     buttonTwoState=digitalRead(buttonTwo);
     if(buttonTwoState==LOW){
       busyMenu=true;
-      menu_pet();
+      myScreen.clear(blackColour);
+      //continuos cycle in the menu until a function is selected or exited
+      while(menu_pet());
     }
   }
 }

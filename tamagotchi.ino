@@ -38,8 +38,8 @@ opt3001 opt3001;
 #define x_image 64
 #define y_image 64
 //limit of light value to change background
-#define LIGHT_LIMIT 500
-#define LIFE_PET 200
+#define LIGHT_LIMIT 100
+#define LIFE_PET 100
 
 const int buttonOne = 33;     // the number of the pushbutton pin
 const int buttonTwo = 32;     // the number of the pushbutton pin
@@ -86,6 +86,8 @@ int whiteLight=0;
 bool goMenu=false;
 //semaphore to stop the life for the menu
 bool busyMenu=false;
+
+bool game_over=false; //boolean for the gameover
 
 void beep(int note, int duration)
 {
@@ -220,8 +222,14 @@ void life()
     float objt = tmp006.readObjTempC();
     float diet = tmp006.readDieTempC();
   */
-  sprintf(string, "Health : %03d", life_pet);
-  myScreen.gText(30, 20, string, greenColour, 1, 1);
+  if(life_pet>0){
+    sprintf(string, "Health : %03d", life_pet);
+    myScreen.gText(30, 20, string, greenColour, 1, 1);
+    life_pet--;
+  }
+  else{
+    gameOver();
+  }
 
 
   /*
@@ -230,8 +238,16 @@ void life()
   myScreen.gText(30, 110, temp, greenColour, 1, 1);
   */
 
-  life_pet--;
   delay(1000);
+}
+
+//in the game over, i block everything
+void gameOver(){
+  game_over=true;
+  goMenu=false;
+  myScreen.clear(blackColour);
+  drawBitmap(bmp);
+  myScreen.gText(30, 20, "Game Over", redColour, 1, 1);
 }
 
 void light(){
@@ -350,7 +366,7 @@ void setup()
 void loop()
 {
   //if the menu of the pet is not active, then i can use the light and the life
-  if(!busyMenu){
+  if(!busyMenu && !game_over){
     life();
     light();
   }

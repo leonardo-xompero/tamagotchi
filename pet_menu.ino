@@ -22,17 +22,70 @@
 #include <Terminal12e.h>
 #include <Terminal6e.h>
 #include <Terminal8e.h>
+
 // Define variables and constants
-//lower limit of the choices
-#define CHOICE_INF 0
-//unper bound of the choice (the value is #choices-1)
-#define CHOICE_SUP 4
+#define CHOICE_INF 0    //lower limit of the choices
+#define CHOICE_SUP 5    //unper bound of the choice (the value is #choices-1)
+
+#define TIME_MESSAGE 5000   //variable for the delay for showing the message
 int choiceX=0;
 
+//velocity
+int tempo = 180;
+int notes = sizeof(melody) / sizeof(melody[0]) / 2;
+// this calculates the duration of a whole note in ms
+int wholenote = (60000 * 4) / tempo;
+int divider = 0, noteDuration = 0;
+
 //function for return the previous menu
-void return_menu(){
+bool return_menu(){
   myScreen.clear(blackColour);
   drawBitmap(bmp);
+  choiceX=0;
+  busyMenu=false;
+  return false;
+}
+
+void showMessage(int points){  
+    char sPoints[10];
+    sprintf(sPoints, "by %d", points); 
+    myScreen.clear(blackColour);
+    myScreen.gText(30, 60, "The pet life", blueColour, blackColour, 1, 1);
+    myScreen.gText(30, 70, "is increased", blueColour, blackColour, 1, 1);
+    myScreen.gText(30, 80, sPoints, blueColour, blackColour, 1, 1);
+    delay(TIME_MESSAGE);
+    life_pet+=points;
+}
+
+//function for the event "dance"
+bool dance(){  
+  for (int thisNote = 0; thisNote < notes * 2; thisNote = thisNote + 2) {
+
+    // calculates the duration of each note
+    divider = melody[thisNote + 1];
+    if (divider > 0) {
+      // regular note, just proceed
+      noteDuration = (wholenote) / divider;
+    } else if (divider < 0) {
+      // dotted notes are represented with negative durations!!
+      noteDuration = (wholenote) / abs(divider);
+      noteDuration *= 1.5; // increases the duration in half for dotted notes
+    }
+
+    // we only play the note for 90% of the duration, leaving 10% as a pause
+    tone(buzzerPin, melody[thisNote], noteDuration * 0.9);
+
+    // Wait for the specief duration before playing the next note.
+    delay(noteDuration);
+
+    // stop the waveform generation before the next note.
+    noTone(buzzerPin);
+
+    //check if the user pressed the button 2
+    buttonTwoState=digitalRead(buttonTwo);
+    if(buttonTwoState==LOW) break;
+  }
+  return false;
 }
 
 //menu for the choice of the action of the pet
@@ -61,7 +114,8 @@ bool menu_pet()
   switch (choiceX)
   {
     case 0:
-        myScreen.gText(30, 30, "walk", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 10, "dance", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 70, "eat", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 90, "play", greenColour, blackColour, 1, 1);
@@ -69,6 +123,16 @@ bool menu_pet()
         break;
         
     case 1:
+        myScreen.gText(30, 10, "dance", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 30, "walk", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 70, "eat", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 90, "play", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 110, "exit", greenColour, blackColour, 1, 1);
+        break;
+        
+    case 2:
+        myScreen.gText(30, 10, "dance", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 50, "sleep", greenColour, orangeColour, 1, 1);
         myScreen.gText(30, 70, "eat", greenColour, blackColour, 1, 1);
@@ -76,7 +140,8 @@ bool menu_pet()
         myScreen.gText(30, 110, "exit", greenColour, blackColour, 1, 1);
         break;
         
-    case 2:
+    case 3:
+        myScreen.gText(30, 10, "dance", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 70, "eat", greenColour, orangeColour, 1, 1);
@@ -84,7 +149,8 @@ bool menu_pet()
         myScreen.gText(30, 110, "exit", greenColour, blackColour, 1, 1);
         break;      
 
-    case 3:
+    case 4:
+        myScreen.gText(30, 10, "dance", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 70, "eat", greenColour, blackColour, 1, 1);
@@ -92,7 +158,8 @@ bool menu_pet()
         myScreen.gText(30, 110, "exit", greenColour, blackColour, 1, 1);
         break; 
 
-    case 4:
+    case 5:
+        myScreen.gText(30, 10, "dance", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
         myScreen.gText(30, 70, "eat", greenColour, blackColour, 1, 1);
@@ -107,16 +174,21 @@ bool menu_pet()
     switch (choiceX)
     {
       case 0:
+          myScreen.clear(blackColour);
+          drawBitmap(bmp);
+          myScreen.gText(5, 20, "The pet is dancing!", blueColour, blackColour, 1, 1);
+          while(dance());
+          myScreen.gText(15, 110, "The pet had fun!", blueColour, blackColour, 1, 1);
+          delay(TIME_MESSAGE);
+          showMessage(50);
+          return return_menu();         
           break;
       case 1:
           break;
           
-      case 4:
+      case 5:
           beep(NOTE_GS3, 125);  
-          return_menu();
-          choiceX=0;
-          busyMenu=false;
-          return false;
+          return return_menu();
           break;          
     }
   }

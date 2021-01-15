@@ -54,7 +54,9 @@ void showMessage(int points){
     myScreen.gText(30, 70, "is increased", blueColour, blackColour, 1, 1);
     myScreen.gText(30, 80, sPoints, blueColour, blackColour, 1, 1);
     delay(TIME_MESSAGE);
-    life_pet+=points;
+    //check the limit
+    if( life_pet+points<999)
+      life_pet+=points;
 }
 
 //function for the event "dance"

@@ -79,8 +79,8 @@ int buzzerPin = 40;
 char temp[8];
 
 //variables for checking the background
-int blackLight=1;
-int whiteLight=0;
+int blackLight=0;
+int whiteLight=1;
 
 //boolen to make pet_menu start
 bool goMenu=false;
@@ -224,7 +224,8 @@ void life()
   */
   if(life_pet>0){
     sprintf(string, "Health : %03d", life_pet);
-    myScreen.gText(30, 20, string, greenColour, 1, 1);
+    if(whiteLight==1) myScreen.gText(30, 20, string, blackColour, greenColour, 1, 1);
+    else myScreen.gText(30, 20, string, greenColour, blackColour, 1, 1);
     life_pet--;
   }
   else{
@@ -267,19 +268,19 @@ void light(){
   //myScreen.gText(30, 110, temp, greenColour, 1, 1);
 
   //sequence to check if there's some obstruction of the light
-  if(blackLight==1 && whiteLight==0 && readings<LIGHT_LIMIT){
-    myScreen.clear(whiteColour);
-    if(choice) drawBitmap(bmp);
-    else drawBitmap(nc_bmp);
-    blackLight=0;
-    whiteLight=1;
-  }
-  else if(blackLight==0 && whiteLight==1 && readings>=LIGHT_LIMIT){
+  if(blackLight==0 && whiteLight==1 && readings<LIGHT_LIMIT){
     myScreen.clear(blackColour);
     if(choice) drawBitmap(bmp);
     else drawBitmap(nc_bmp);
     blackLight=1;
     whiteLight=0;
+  }
+  else if(blackLight==1 && whiteLight==0 && readings>=LIGHT_LIMIT){
+    myScreen.clear(whiteColour);
+    if(choice) drawBitmap(bmp);
+    else drawBitmap(nc_bmp);
+    blackLight=0;
+    whiteLight=1;
   }
   delay(100);
 }
@@ -349,13 +350,13 @@ void setup()
 
   if (menu())
   {
-    myScreen.clear(blackColour);
+    myScreen.clear(whiteColour);
     drawBitmap(bmp);
     choice=true;
   }
   else
   {
-    myScreen.clear(blackColour);
+    myScreen.clear(whiteColour);
     drawBitmap(nc_bmp);
     choice=false;
   }

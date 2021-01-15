@@ -114,7 +114,7 @@
 
 #define REST      0
 
-int melody[] = {
+int nokia[] = {
 	//tempo=180
   // Nokia Ringtone 
   // Score available at https://musescore.com/user/29944637/scores/5266155
@@ -424,7 +424,7 @@ int starwars[] = {
 
 
 
-int rickrolling[] = {
+int melody[] = {
 	//tempo=114
   // Never Gonna Give You Up - Rick Astley
   // Score available at https://musescore.com/chlorondria_5/never-gonna-give-you-up_alto-sax

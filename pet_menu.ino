@@ -27,11 +27,11 @@
 #define CHOICE_INF 0    //lower limit of the choices
 #define CHOICE_SUP 5    //unper bound of the choice (the value is #choices-1)
 
-#define TIME_MESSAGE 5000   //variable for the delay for showing the message
+#define TIME_MESSAGE 3000   //variable for the delay for showing the message
 int choiceX=0;
 
 //velocity
-int tempo = 180;
+int tempo = 114;
 int notes = sizeof(melody) / sizeof(melody[0]) / 2;
 // this calculates the duration of a whole note in ms
 int wholenote = (60000 * 4) / tempo;
@@ -39,7 +39,7 @@ int divider = 0, noteDuration = 0;
 
 //function for return the previous menu
 bool return_menu(){
-  myScreen.clear(blackColour);
+  myScreen.clear(whiteColour);
   drawBitmap(bmp);
   choiceX=0;
   busyMenu=false;

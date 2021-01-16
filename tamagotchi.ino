@@ -41,6 +41,12 @@ opt3001 opt3001;
 #define LIGHT_LIMIT 100
 #define LIFE_PET 100
 
+int orientation=0;    //variable for the orientation
+
+const int xpin = 23; // x-axis of the accelerometer
+const int ypin = 24; // y-axis
+const int zpin = 25; // z-axis (only on 3-axis models)
+
 const int buttonOne = 33;     // the number of the pushbutton pin
 const int buttonTwo = 32;     // the number of the pushbutton pin
 const int ledGreen = 38;      // the number of the LED pin
@@ -101,7 +107,6 @@ void beep(int note, int duration)
 //function for printing the images from an array of char
 void drawBitmap(const unsigned char *bmp)
 {
-
   uint32_t p;
   uint16_t c;
   uint16_t x00 = 0;
@@ -150,6 +155,41 @@ void drawBitmap(const unsigned char *bmp)
         }
       }
   }
+}
+
+void changeOrientation(){
+  //foor the accelerometer, we need 12 bit, so we set it 
+  analogReadResolution(12);
+  int analogValue;
+  // CHECK X AXIS (red) 
+    if(analogValue >2048 && orientation != 3){ // check if tilting on x axis in positive direction
+        myScreen.clear(blackColour);
+        myScreen.setOrientation(3);
+        drawBitmap(bmp);
+        orientation=3;
+    } 
+    else if(analogValue<2048 && orientation != 1){ // check if tilting on x axis in negative direction 
+        myScreen.clear(blackColour);
+        myScreen.setOrientation(1);
+        drawBitmap(bmp);
+        orientation=1;
+    } 
+    // CHECK Y AXIS (green) 
+    analogValue = analogRead(ypin); // read Y axis 
+    if(analogValue >2048 && orientation != 2){ // check if tilting on Y axis in positive direction 
+        myScreen.clear(blackColour);
+        myScreen.setOrientation(2);
+        drawBitmap(bmp);
+        orientation=2;
+    } 
+    else if(analogValue<2048 && orientation != 0){ // check if tilting on Y axis in negative direction 
+        myScreen.clear(blackColour);
+        myScreen.setOrientation(0);
+        drawBitmap(bmp);
+        orientation=0;
+    } 
+    //now we need to set the default value for msp432
+    analogReadResolution(10);
 }
 
 float getTemp(void)
@@ -340,6 +380,7 @@ void setup()
   myScreen.begin();
   //initialized the sensor for the light
   opt3001.begin(); 
+  
   //initialize the buzzer
   pinMode(buzzerPin,OUTPUT);
 
@@ -370,5 +411,6 @@ void loop()
   if(!busyMenu && !game_over){
     life();
     light();
+    //changeOrientation();
   }
 }

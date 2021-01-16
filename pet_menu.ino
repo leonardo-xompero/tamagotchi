@@ -39,7 +39,8 @@ int divider = 0, noteDuration = 0;
 
 //function for return the previous menu
 bool return_menu(){
-  myScreen.clear(whiteColour);
+  if(blackLight==1)myScreen.clear(blackColour);
+  else myScreen.clear(whiteColour);
   drawBitmap(bmp);
   choiceX=0;
   busyMenu=false;
@@ -186,6 +187,7 @@ bool menu_pet()
           return return_menu();         
           break;
       case 1:
+          return return_menu();  
           break;
           
       case 5:

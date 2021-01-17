@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include <cstdlib>
 
 // Following includes for Energia only
 #include <SPI.h>
@@ -95,40 +96,6 @@ void drawBitmap(const unsigned char *bmp)
   }
 }
 
-void changeOrientation(){
-  //foor the accelerometer, we need 12 bit, so we set it 
-  analogReadResolution(12);
-  int analogValue;
-  // CHECK X AXIS (red) 
-    if(analogValue >2048 && orientation != 3){ // check if tilting on x axis in positive direction
-        myScreen.clear(blackColour);
-        myScreen.setOrientation(3);
-        drawBitmap(bmp);
-        orientation=3;
-    } 
-    else if(analogValue<2048 && orientation != 1){ // check if tilting on x axis in negative direction 
-        myScreen.clear(blackColour);
-        myScreen.setOrientation(1);
-        drawBitmap(bmp);
-        orientation=1;
-    } 
-    // CHECK Y AXIS (green) 
-    analogValue = analogRead(ypin); // read Y axis 
-    if(analogValue >2048 && orientation != 2){ // check if tilting on Y axis in positive direction 
-        myScreen.clear(blackColour);
-        myScreen.setOrientation(2);
-        drawBitmap(bmp);
-        orientation=2;
-    } 
-    else if(analogValue<2048 && orientation != 0){ // check if tilting on Y axis in negative direction 
-        myScreen.clear(blackColour);
-        myScreen.setOrientation(0);
-        drawBitmap(bmp);
-        orientation=0;
-    } 
-    //now we need to set the default value for msp432
-    analogReadResolution(10);
-}
 
 float getTemp(void)
 {
@@ -349,6 +316,5 @@ void loop()
   if(!busyMenu && !game_over){
     life();
     light();
-    //changeOrientation();
   }
 }

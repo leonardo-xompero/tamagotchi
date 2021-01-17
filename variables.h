@@ -11,7 +11,17 @@
 
 #define TIME_MESSAGE 3000   //variable for the delay for showing the message
 
-int orientation=0;    //variable for the orientation
+#define BAR_LIMIT 10	//limit of the bar game
+#define STEP 1	//how many steps the player do at times in the game
+
+    char bar[BAR_LIMIT];
+    int i=0;
+    int j=BAR_LIMIT;
+	int randOrientation;
+
+const int redLED= 39; // assign red LED to Pin #9
+const int greenLED= 38;// assign green LED to Pin #10
+const int blueLED= 37; // assign blueLED to Pin #12
 
 const int xpin = 23; // x-axis of the accelerometer
 const int ypin = 24; // y-axis

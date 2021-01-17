@@ -1,7 +1,3 @@
-#include <OPT3001.h>
-
-
-
 // Core library for code-sense
 #if defined(ENERGIA) // LaunchPad MSP430, Stellaris and Tiva, Experimeter Board FR5739 specific
 #include "Energia.h"
@@ -26,74 +22,16 @@
 #include <Terminal12e.h>
 #include <Terminal6e.h>
 #include <Terminal8e.h>
+#include <OPT3001.h>
 //include images of the pet
 #include "pet/pet_models.h"
 #include "pet/pet_music.h"
+#include "variables.h"
 
 Screen_HX8353E myScreen;
 opt3001 opt3001;
 
-// Define variables and constants
-//size of the image
-#define x_image 64
-#define y_image 64
-//limit of light value to change background
-#define LIGHT_LIMIT 100
-#define LIFE_PET 100
 
-int orientation=0;    //variable for the orientation
-
-const int xpin = 23; // x-axis of the accelerometer
-const int ypin = 24; // y-axis
-const int zpin = 25; // z-axis (only on 3-axis models)
-
-const int buttonOne = 33;     // the number of the pushbutton pin
-const int buttonTwo = 32;     // the number of the pushbutton pin
-const int ledGreen = 38;      // the number of the LED pin
-const int ledBlue = 37;      // the number of the LED pin
-const int ledRed = 39;        // the number of the LED pin
-
-const int joystickSel = 5;     // the number of the joystick select pin
-const int joystickX = 2;       // the number of the joystick X-axis analog
-const int joystickY = 26;     // the number of the joystick Y-axis analog
-
-// variables will change:
-int buttonOneState = 0;         // variable for reading the pushbutton #1 status
-int buttonTwoState = 0;         // variable for reading the pushbutton #2 status
-
-int joystickSelState = 0;      // variable for reading the joystick sel status
-int joystickXState, joystickYState;
-
-int life_pet = LIFE_PET;
-char string[10];
-//choice of the firs menu
-bool menu_step = false;
-//choice of the pet
-bool choice;
-
-//variables for the light sensor
-const uint8_t backlightPin = 39; //PWM-capable pin tied to backlight
-const uint16_t darkestLUX = 0; 
-const uint16_t brightestLUX = 4000;
-const uint8_t dimmestBacklight = 55;
-const uint8_t brightestBacklight = 254;
-
-//pin for the buzzer
-int buzzerPin = 40;
-
-//float fTemp;
-char temp[8];
-
-//variables for checking the background
-int blackLight=0;
-int whiteLight=1;
-
-//boolen to make pet_menu start
-bool goMenu=false;
-//semaphore to stop the life for the menu
-bool busyMenu=false;
-
-bool game_over=false; //boolean for the gameover
 
 void beep(int note, int duration)
 {

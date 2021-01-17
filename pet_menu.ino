@@ -1,41 +1,4 @@
-// Core library for code-sense
-#if defined(ENERGIA) // LaunchPad MSP430, Stellaris and Tiva, Experimeter Board FR5739 specific
-#include "Energia.h"
-#else // error
-#error Platform not defined
-#endif
 
-// Library for simplekit
-#include <ti/devices/msp432p4xx/inc/msp.h>
-#include <ti/devices/msp432p4xx/driverlib/driverlib.h>
-#include <ti/grlib/grlib.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <string.h>
-
-// Following includes for Energia only
-#include <SPI.h>
-#include <LCD_screen.h>
-#include <LCD_screen_font.h>
-#include <LCD_utilities.h>
-#include <Screen_HX8353E.h>
-#include <Terminal12e.h>
-#include <Terminal6e.h>
-#include <Terminal8e.h>
-
-// Define variables and constants
-#define CHOICE_INF 0    //lower limit of the choices
-#define CHOICE_SUP 5    //unper bound of the choice (the value is #choices-1)
-
-#define TIME_MESSAGE 3000   //variable for the delay for showing the message
-int choiceX=0;
-
-//velocity
-int tempo = 114;
-int notes = sizeof(melody) / sizeof(melody[0]) / 2;
-// this calculates the duration of a whole note in ms
-int wholenote = (60000 * 4) / tempo;
-int divider = 0, noteDuration = 0;
 
 //function for return the previous menu
 bool return_menu(){

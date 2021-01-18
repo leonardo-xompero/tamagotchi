@@ -13,6 +13,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <cstdlib>
+#include <time.h>
 
 // Following includes for Energia only
 #include <SPI.h>

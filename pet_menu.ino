@@ -11,14 +11,22 @@ bool return_menu(){
 void initPlay(){
   //drawBitmap(bmp);
   //myScreen.gText(5, 20, "Play with your pet!", blueColour, blackColour, 1, 1);
-  i=0;
-  j=BAR_LIMIT;
+  bar_loaded=0;
   //initialize the bar
-  for(int x=0;x<j;x++) bar[x]='_';
+  for(int x=0;x<BAR_LIMIT;x++) bar[x]='_';
   bar[0]='|';
-  //set a random orienation for the game
-  randOrientation= rand() % 4;
-  //TODO : MESSAGE OF HOW TO PLAY AND INDICATION OF THE ORIENTATION
+  
+  //srand(time(0));   //use the time for the seed  
+  //randOrientation= rand() % 3;  //set a random orienation for the game
+  randOrientation=0;
+  winGame=false;
+  myScreen.gText(10, 10, "Tilt the board", blueColour, blackColour, 1, 1);
+  myScreen.gText(10, 20, "to the right", blueColour, blackColour, 1, 1);
+  myScreen.gText(10, 30, "to refill the bar.", blueColour, blackColour, 1, 1);
+  myScreen.gText(10, 60, "Press button 2", blueColour, blackColour, 1, 1);
+  myScreen.gText(10, 70, "to exit.", blueColour, blackColour, 1, 1);
+  delay(5000);
+  myScreen.clear(blackColour);
 }
 
 //show the message after the action, the points may vary from the action performed
@@ -38,48 +46,61 @@ void showMessage(int points){
 //the random variables decides the axys of the screen
 bool play(){
     myScreen.setOrientation(randOrientation);
-    myScreen.gText(30,50,"0",greenColour,blackColour,1,1);
-    myScreen.gText(85,50,"10",greenColour,blackColour,1,1);
-    myScreen.gText(30,60,bar,greenColour,blackColour,1,1);
+    myScreen.gText(10,50,"0",greenColour,blackColour,1,1);
+    myScreen.gText(115,50,"F",greenColour,blackColour,1,1);
+    myScreen.gText(10,60,bar,greenColour,blackColour,1,1);
     analogReadResolution(12);
     //foor the accelerometer, we need 12 bit, so we set it 
     int analogValue;
-    if(randOrientation == 0 || randOrientation == 2){
+    //check the orientation generated
+    if(randOrientation == 0){
       // CHECK X AXIS (red) 
+      digitalWrite(redLED,HIGH);
       analogValue = analogRead(xpin); // read Y axis 
       if(analogValue >2048){ // check if tilting on x axis in positive direction
-         if(i<j){
-            bar[i]='|';
-            i+=STEP;
+         if(bar_loaded<BAR_LIMIT){
+            bar[bar_loaded]='|';
+            bar_loaded++;
+         }else{
+            winGame=true;
+            digitalWrite(redLED,LOW);
+            digitalWrite(greenLED,HIGH);
          }
+         delay(TIME_BAR);
       } 
-      else if(analogValue<2048){ // check if tilting on x axis in negative direction 
-          if(i>0){
-            bar[i]='_';
-            i-=STEP;
+      else { // check if tilting on x axis in negative direction 
+          if(bar_loaded>0){            
+            bar_loaded--;
+            bar[bar_loaded]='_';
           }
-      } 
-    }else{
+      }      
+      
+    }
+    /*else{
       // CHECK Y AXIS (green) 
       analogValue = analogRead(ypin); // read Y axis 
       if(analogValue >2048){ // check if tilting on Y axis in positive direction 
-          if(i<j){
-            bar[i]='|';
-            i+=STEP;
+          if(bar_loaded<BAR_LIMIT){
+            bar[bar_loaded]='|';
+            bar_loaded++;
+         }else{
+            winGame=true;
+            digitalWrite(redLED,LOW);
+            digitalWrite(greenLED,HIGH);
          }
       } 
       else if(analogValue<2048){ // check if tilting on Y axis in negative direction 
-        if(i>0){
-            bar[i]='_';
-            i-=STEP;
+        if(bar_loaded>0){          
+            bar_loaded--;
+            bar[bar_loaded]='_';
           }
       } 
     }
-    delay(10);
+    */
   //now we need to set the default value for msp432
   analogReadResolution(10);
   buttonTwoState=digitalRead(buttonTwo);
-  if(buttonTwoState==LOW) {
+  if(buttonTwoState==LOW || winGame) {
     myScreen.setOrientation(0);
     return false;
   }
@@ -220,9 +241,12 @@ bool menu_pet()
           myScreen.clear(blackColour);          
           initPlay();
           while(play());
-          myScreen.gText(15, 110, "The pet had fun!", blueColour, blackColour, 1, 1);
+          if(winGame) myScreen.gText(40, 80, "You WON!", blueColour, blackColour, 1, 1);
+          else myScreen.gText(40, 80, "You LOST!", blueColour, blackColour, 1, 1);
           delay(TIME_MESSAGE);
-          showMessage(50);
+          digitalWrite(redLED,LOW);
+          digitalWrite(greenLED,LOW);
+          if(winGame) showMessage(100);
           return return_menu(); 
           break;
           

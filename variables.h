@@ -9,15 +9,15 @@
 #define CHOICE_INF 0    //lower limit of the choices
 #define CHOICE_SUP 5    //unper bound of the choice (the value is #choices-1)
 
-#define TIME_MESSAGE 3000   //variable for the delay for showing the message
+#define TIME_MESSAGE 2000   //variable for the delay for showing the message
 
-#define BAR_LIMIT 10	//limit of the bar game
-#define STEP 1	//how many steps the player do at times in the game
+#define BAR_LIMIT 18	//limit of the bar game (the value was obtained with a long sequence of trial & error)
+#define TIME_BAR  500  //time of delay for the loading of the bar
 
-    char bar[BAR_LIMIT];
-    int i=0;
-    int j=BAR_LIMIT;
-	int randOrientation;
+char bar[BAR_LIMIT];  //array of char to simulate the bar loading
+int bar_loaded=0;     //contator for the loading
+int randOrientation;  //variable generated randomly, needed for the random inclination of the bar (not implemented)
+bool winGame=false;   //booleab to check if the player won the game
 
 const int redLED= 39; // assign red LED to Pin #9
 const int greenLED= 38;// assign green LED to Pin #10

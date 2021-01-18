@@ -75,7 +75,7 @@ bool busyMenu=false;		//semaphore to stop the life for the menu
 
 bool game_over=false; //boolean for the gameover
 
-int choiceX=0;	//variable for the choice in the pet menu
+int choiceX;	//variable for the choice in the pet menu
 
 //velocity
 int tempo = 114;

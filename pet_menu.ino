@@ -141,13 +141,11 @@ bool dance(){
 //menu for the choice of the action of the pet
 bool menu_pet()
 {  
-  choiceX=0;
   joystickYState = analogRead(joystickY);
   joystickYState = map(joystickYState, 0, 4096, 0, 255);
   if (joystickYState > 60)
   {
-    beep(NOTE_C6, 125);  
-    //choiceX = 0;
+    beep(NOTE_C6, 125);
     if(choiceX>CHOICE_INF){
       choiceX--;
       delay(10);
@@ -156,7 +154,6 @@ bool menu_pet()
   else if (joystickYState < 10)
   {
     beep(NOTE_C6, 125); 
-    //choiceX = 1;
     if(choiceX<CHOICE_SUP){
       choiceX++;
       delay(10);
@@ -302,8 +299,6 @@ void menu_pet_loop()
 {
   //if i made the choice in the menu, then i can start the task
   if(goMenu){
-    
-    //life();
     buttonTwoState=digitalRead(buttonTwo);
     if(buttonTwoState==LOW){
       busyMenu=true;

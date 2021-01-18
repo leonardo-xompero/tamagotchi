@@ -3,7 +3,7 @@
 #define x_image 64
 #define y_image 64
 
-#define LIGHT_LIMIT 50		//limit of light value to change background
+#define LIGHT_LIMIT 80		//limit of light value to change background
 #define LIFE_PET 100		//life of the pet
 
 #define CHOICE_INF 0    //lower limit of the choices

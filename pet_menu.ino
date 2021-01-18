@@ -141,6 +141,7 @@ bool dance(){
 //menu for the choice of the action of the pet
 bool menu_pet()
 {  
+  choiceX=0;
   joystickYState = analogRead(joystickY);
   joystickYState = map(joystickYState, 0, 4096, 0, 255);
   if (joystickYState > 60)
@@ -164,57 +165,57 @@ bool menu_pet()
   switch (choiceX)
   {
     case 0:
-        myScreen.gText(30, 10, "dance", greenColour, orangeColour, 1, 1);
-        myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 70, "eat", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 90, "play", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 110, "exit", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 10, "1 - Dance", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 30, "2 - Walk", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 50, "3 - Sleep", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 70, "4 - Eat", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 90, "5 - Play", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 110,"6 - Exit", greenColour, blackColour, 1, 1);
         break;
         
     case 1:
-        myScreen.gText(30, 10, "dance", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 30, "walk", greenColour, orangeColour, 1, 1);
-        myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 70, "eat", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 90, "play", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 110, "exit", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 10, "1 - Dance", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 30, "2 - Walk", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 50, "3 - Sleep", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 70, "4 - Eat", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 90, "5 - Play", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 110,"6 - Exit", greenColour, blackColour, 1, 1);
         break;
         
     case 2:
-        myScreen.gText(30, 10, "dance", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 50, "sleep", greenColour, orangeColour, 1, 1);
-        myScreen.gText(30, 70, "eat", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 90, "play", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 110, "exit", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 10, "1 - Dance", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 30, "2 - Walk", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 50, "3 - Sleep", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 70, "4 - Eat", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 90, "5 - Play", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 110,"6 - Exit", greenColour, blackColour, 1, 1);
         break;
         
     case 3:
-        myScreen.gText(30, 10, "dance", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 70, "eat", greenColour, orangeColour, 1, 1);
-        myScreen.gText(30, 90, "play", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 110, "exit", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 10, "1 - Dance", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 30, "2 - Walk", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 50, "3 - Sleep", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 70, "4 - Eat", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 90, "5 - Play", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 110,"6 - Exit", greenColour, blackColour, 1, 1);
         break;      
 
     case 4:
-        myScreen.gText(30, 10, "dance", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 70, "eat", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 90, "play", greenColour, orangeColour, 1, 1);
-        myScreen.gText(30, 110, "exit", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 10, "1 - Dance", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 30, "2 - Walk", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 50, "3 - Sleep", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 70, "4 - Eat", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 90, "5 - Play", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 110,"6 - Exit", greenColour, blackColour, 1, 1);
         break; 
 
     case 5:
-        myScreen.gText(30, 10, "dance", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 30, "walk", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 50, "sleep", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 70, "eat", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 90, "play", greenColour, blackColour, 1, 1);
-        myScreen.gText(30, 110, "exit", greenColour, orangeColour, 1, 1);
+        myScreen.gText(30, 10, "1 - Dance", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 30, "2 - Walk", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 50, "3 - Sleep", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 70, "4 - Eat", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 90, "5 - Play", greenColour, blackColour, 1, 1);
+        myScreen.gText(30, 110,"6 - Exit", greenColour, orangeColour, 1, 1);
         break; 
   }
   
@@ -223,7 +224,7 @@ bool menu_pet()
   if(buttonOneState==LOW){
     switch (choiceX)
     {
-      case 0:
+      case 0: //dance
           myScreen.clear(blackColour);
           drawBitmap(bmp);
           myScreen.gText(5, 20, "The pet is dancing!", blueColour, blackColour, 1, 1);
@@ -233,11 +234,41 @@ bool menu_pet()
           showMessage(50);
           return return_menu();         
           break;
-      case 1:
+          
+      case 1: //walk
+          myScreen.clear(blackColour);
+          drawBitmap(bmp);
+          myScreen.gText(5, 20, "The pet is walking!", blueColour, blackColour, 1, 1);
+          //TODO : something
+          myScreen.gText(15, 110, "The pet had fun!", blueColour, blackColour, 1, 1);
+          delay(TIME_MESSAGE);
+          showMessage(20);
+          return return_menu();  
+          break;
+          
+      case 2: //sleep
+          myScreen.clear(blackColour);
+          drawBitmap(bmp);
+          myScreen.gText(5, 20, "The pet is sleeping!", blueColour, blackColour, 1, 1);
+          //TODO something
+          myScreen.gText(15, 110, "The pet had fun!", blueColour, blackColour, 1, 1);
+          delay(TIME_MESSAGE);
+          showMessage(30);
+          return return_menu();  
+          break;
+          
+      case 3: //eat
+          myScreen.clear(blackColour);
+          drawBitmap(bmp);
+          myScreen.gText(5, 20, "The pet is eatingg!", blueColour, blackColour, 1, 1);
+          //TODO something
+          myScreen.gText(15, 110, "The pet had fun!", blueColour, blackColour, 1, 1);
+          delay(TIME_MESSAGE);
+          showMessage(40);
           return return_menu();  
           break;
 
-      case 4:
+      case 4: //play
           myScreen.clear(blackColour);          
           initPlay();
           while(play());
@@ -250,7 +281,7 @@ bool menu_pet()
           return return_menu(); 
           break;
           
-      case 5:
+      case 5: //exit
           beep(NOTE_GS3, 125);  
           return return_menu();
           break;          

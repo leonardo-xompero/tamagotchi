@@ -243,6 +243,7 @@ void light(){
 bool menu()
 {
   intro();
+  myScreen.gText(20, 20, "Choose your pet", yellowColour, blackColour, 1, 1);
   //stay in the loop until the user makes a decision
   for (;;)
   {
@@ -261,15 +262,15 @@ bool menu()
     switch (menu_step)
     {
       case false:
-        myScreen.gText(30, 30, "pet1", greenColour, orangeColour, 1,
+        myScreen.gText(30, 60, "pet1", myScreen.reverseColour(greenColour), blackColour, 1,
                        1);
-        myScreen.gText(80, 30, "pet2", greenColour, blackColour, 1,
+        myScreen.gText(80, 60, "pet2", greenColour, blackColour, 1,
                        1);
         break;
       case true:
-        myScreen.gText(30, 30, "pet1", greenColour, blackColour, 1,
+        myScreen.gText(30, 60, "pet1", greenColour, blackColour, 1,
                        1);
-        myScreen.gText(80, 30, "pet2", greenColour, orangeColour,
+        myScreen.gText(80, 60, "pet2", myScreen.reverseColour(greenColour), blackColour,
                        1, 1);
         break;
     }

@@ -13,6 +13,7 @@
 
 #define BAR_LIMIT 18	//limit of the bar game (the value was obtained with a long sequence of trial & error)
 #define TIME_BAR  500  //time of delay for the loading of the bar
+#define TIME_SLEEP 10 //how much time the pet need to sleep
 
 char bar[BAR_LIMIT];  //array of char to simulate the bar loading
 int bar_loaded=0;     //contator for the loading
@@ -68,6 +69,8 @@ char temp[8];
 int blackLight=0;
 int whiteLight=1;
 
+bool rested=false; //boolean to check if the pet is rested
+int sleep;    //time to sleep
 
 bool goMenu=false;		//boolen to make pet_menu start
 

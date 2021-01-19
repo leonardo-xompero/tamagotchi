@@ -21,9 +21,9 @@ void initPlay(){
   //randOrientation= rand() % 3;  //set a random orienation for the game
   randOrientation=0;
   winGame=false;
-  myScreen.gText(10, 10, "Tilt the board", blueColour, blackColour, 1, 1);
-  myScreen.gText(10, 20, "to the right", blueColour, blackColour, 1, 1);
-  myScreen.gText(10, 30, "to refill the bar.", blueColour, blackColour, 1, 1);
+  myScreen.gText(10, 10, "Tilt the board", yellowColour, blackColour, 1, 1);
+  myScreen.gText(10, 20, "to the right", yellowColour, blackColour, 1, 1);
+  myScreen.gText(10, 30, "to refill the bar.", yellowColour, blackColour, 1, 1);
   myScreen.gText(10, 60, "Press button 2", redColour, blackColour, 1, 1);
   myScreen.gText(10, 70, "to exit.", redColour, blackColour, 1, 1);
   delay(5000);
@@ -35,9 +35,9 @@ void showMessage(int points){
     char sPoints[10];
     sprintf(sPoints, "by %d", points); 
     myScreen.clear(blackColour);
-    myScreen.gText(30, 50, "The pet life", blueColour, blackColour, 1, 1);
-    myScreen.gText(30, 60, "is increased", blueColour, blackColour, 1, 1);
-    myScreen.gText(30, 70, sPoints, blueColour, blackColour, 1, 1);
+    myScreen.gText(30, 50, "The pet life", yellowColour, blackColour, 1, 1);
+    myScreen.gText(30, 60, "is increased", yellowColour, blackColour, 1, 1);
+    myScreen.gText(30, 70, sPoints, yellowColour, blackColour, 1, 1);
     delay(TIME_MESSAGE);
     //check the limit
     if( life_pet+points<999)
@@ -45,7 +45,7 @@ void showMessage(int points){
 }
 
 //the random variables decides the axys of the screen
-bool play(){
+bool petPlay(){
     myScreen.setOrientation(randOrientation);
     myScreen.gText(10,50,"0",greenColour,blackColour,1,1);
     myScreen.gText(115,50,"F",greenColour,blackColour,1,1);
@@ -108,8 +108,30 @@ bool play(){
   else return true;
 }
 
+bool petSleep(){
+  char bed_time[20];
+  sprintf(bed_time, "TIME RESTED : %03d", sleep);
+  myScreen.gText(5, 10, bed_time, yellowColour, blackColour, 1, 1);
+  sprintf(bed_time, "GOAL : %03d", TIME_SLEEP);
+  myScreen.gText(5, 20, bed_time, yellowColour, blackColour, 1, 1);
+  if(sleep>=TIME_SLEEP) rested=true;
+  else sleep++;
+  delay(1000);
+  buttonTwoState=digitalRead(buttonTwo);
+  if(buttonTwoState==LOW || rested) return false;
+  else return true;
+}
+
+bool petWalk(){
+  return false;
+}
+
+bool petEat(){
+  return false;
+}
+
 //function for the event "dance"
-bool dance(){  
+bool petDance(){  
   for (int thisNote = 0; thisNote < notes * 2; thisNote = thisNote + 2) {
 
     // calculates the duration of each note
@@ -226,9 +248,9 @@ bool menu_pet()
           myScreen.clear(blackColour);
           if(choice) drawBitmap(bmp);
           else drawBitmap(nc_bmp);
-          myScreen.gText(5, 20, "The pet is dancing!", blueColour, blackColour, 1, 1);
-          while(dance());
-          myScreen.gText(15, 110, "The pet had fun!", blueColour, blackColour, 1, 1);
+          myScreen.gText(5, 20, "The pet is dancing!", yellowColour, blackColour, 1, 1);
+          while(petDance());
+          myScreen.gText(15, 110, "The pet had fun!", greenColour, blackColour, 1, 1);
           delay(TIME_MESSAGE);
           showMessage(50);
           return return_menu();         
@@ -238,9 +260,9 @@ bool menu_pet()
           myScreen.clear(blackColour);
           if(choice) drawBitmap(bmp);
           else drawBitmap(nc_bmp);
-          myScreen.gText(5, 20, "The pet is walking!", blueColour, blackColour, 1, 1);
-          //TODO : something
-          myScreen.gText(15, 110, "The pet had fun!", blueColour, blackColour, 1, 1);
+          myScreen.gText(5, 20, "The pet is walking!", yellowColour, blackColour, 1, 1);
+          while(petWalk());
+          myScreen.gText(15, 110, "The pet had fun!", greenColour, blackColour, 1, 1);
           delay(TIME_MESSAGE);
           showMessage(20);
           return return_menu();  
@@ -248,13 +270,21 @@ bool menu_pet()
           
       case 2: //sleep
           myScreen.clear(blackColour);
-          if(choice) drawBitmap(bmp);
-          else drawBitmap(nc_bmp);
-          myScreen.gText(5, 20, "The pet is sleeping!", blueColour, blackColour, 1, 1);
-          //TODO something
-          myScreen.gText(15, 110, "The pet had fun!", blueColour, blackColour, 1, 1);
-          delay(TIME_MESSAGE);
-          showMessage(30);
+          if(!rested){
+            if(choice) drawBitmap(bmp);
+            else drawBitmap(nc_bmp);
+            sleep=0;
+            //myScreen.gText(5, 20, "The pet is sleeping!", yellowColour, blackColour, 1, 1);
+            while(petSleep());
+            if(rested) myScreen.gText(5, 110, "The pet is rested!", greenColour, blackColour, 1, 1);
+            else myScreen.gText(5, 110, "The pet is tired!", redColour, blackColour, 1, 1);
+            delay(TIME_MESSAGE);
+            if(rested) showMessage(30);
+          }else{            
+            myScreen.gText(30, 50, "The pet is", yellowColour, blackColour, 1, 1);
+            myScreen.gText(30, 60, "already rested", yellowColour, blackColour, 1, 1);
+            delay(TIME_MESSAGE);
+          }
           return return_menu();  
           break;
           
@@ -262,9 +292,9 @@ bool menu_pet()
           myScreen.clear(blackColour);
           if(choice) drawBitmap(bmp);
           else drawBitmap(nc_bmp);
-          myScreen.gText(5, 20, "The pet is eatingg!", blueColour, blackColour, 1, 1);
-          //TODO something
-          myScreen.gText(15, 110, "The pet had fun!", blueColour, blackColour, 1, 1);
+          myScreen.gText(5, 20, "The pet is eating!", yellowColour, blackColour, 1, 1);
+          while(petEat());
+          myScreen.gText(15, 110, "The pet is full!", greenColour, blackColour, 1, 1);
           delay(TIME_MESSAGE);
           showMessage(40);
           return return_menu();  
@@ -273,8 +303,8 @@ bool menu_pet()
       case 4: //play
           myScreen.clear(blackColour);          
           initPlay();
-          while(play());
-          if(winGame) myScreen.gText(40, 80, "You WON!", blueColour, blackColour, 1, 1);
+          while(petPlay());
+          if(winGame) myScreen.gText(40, 80, "You WON!", greenColour, blackColour, 1, 1);
           else myScreen.gText(40, 80, "You LOST!", redColour, blackColour, 1, 1);
           delay(TIME_MESSAGE);
           digitalWrite(redLED,LOW);

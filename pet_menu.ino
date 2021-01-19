@@ -21,7 +21,21 @@ void initWalk(){
   myScreen.gText(10, 30, "to refill the bar.", yellowColour, blackColour, 1, 1);
   myScreen.gText(10, 60, "Press button 2", redColour, blackColour, 1, 1);
   myScreen.gText(10, 70, "to exit.", redColour, blackColour, 1, 1);
-  delay(5000);
+  delay(TIME_MESSAGE);
+  myScreen.clear(blackColour);
+}
+void initFood(){
+  bar_loaded=0;
+  //initialize the bar
+  for(int x=0;x<BAR_LIMIT;x++) bar[x]='_';
+  bar[0]='|';
+  randOrientation=0;
+  winGame=false;
+  myScreen.gText(10, 20, "Wait", yellowColour, blackColour, 1, 1);
+  myScreen.gText(10, 30, "to refill the bar.", yellowColour, blackColour, 1, 1);
+  myScreen.gText(10, 60, "Press button 2", redColour, blackColour, 1, 1);
+  myScreen.gText(10, 70, "to exit.", redColour, blackColour, 1, 1);
+  delay(TIME_MESSAGE);
   myScreen.clear(blackColour);
 }
 
@@ -42,7 +56,7 @@ void initPlay(){
   myScreen.gText(10, 30, "to refill the bar.", yellowColour, blackColour, 1, 1);
   myScreen.gText(10, 60, "Press button 2", redColour, blackColour, 1, 1);
   myScreen.gText(10, 70, "to exit.", redColour, blackColour, 1, 1);
-  delay(5000);
+  delay(TIME_MESSAGE);
   myScreen.clear(blackColour);
 }
 
@@ -172,7 +186,24 @@ bool petWalk(){
 }
 
 bool petEat(){
-  return false;
+  myScreen.gText(10,100,bar,greenColour,blackColour,1,1);
+  if(bar_loaded<BAR_LIMIT){
+      bar[bar_loaded]='|';
+      bar_loaded++;          
+      delay(TIME_BAR);
+   }else{
+      winGame=true;
+      digitalWrite(redLED,LOW);
+      digitalWrite(greenLED,HIGH);
+   }
+  
+  
+  buttonTwoState=digitalRead(buttonTwo);
+  if(buttonTwoState==LOW || winGame) {
+    myScreen.setOrientation(0);
+    return false;
+  }
+  else return true;
 }
 
 //function for the event "dance"
@@ -309,7 +340,7 @@ bool menu_pet()
           myScreen.gText(5, 10, "The pet is walking!", yellowColour, blackColour, 1, 1);
           while(petWalk());          
           if(winGame) myScreen.gText(15, 110, "The pet had fun!", greenColour, blackColour, 1, 1);
-          else myScreen.gText(15, 110, "The pet is sad!", greenColour, blackColour, 1, 1);
+          else myScreen.gText(15, 110, "The pet is sad!", redColour, blackColour, 1, 1);
           delay(TIME_MESSAGE);
           digitalWrite(redLED,LOW);
           digitalWrite(greenLED,LOW);
@@ -338,14 +369,18 @@ bool menu_pet()
           break;
           
       case 3: //eat
-          myScreen.clear(blackColour);
+          myScreen.clear(blackColour);          
+          initFood();
           if(choice) drawBitmap(bmp);
           else drawBitmap(nc_bmp);
           myScreen.gText(5, 20, "The pet is eating!", yellowColour, blackColour, 1, 1);
           while(petEat());
-          myScreen.gText(15, 110, "The pet is full!", greenColour, blackColour, 1, 1);
-          delay(TIME_MESSAGE);
-          showMessage(40);
+          if(winGame) myScreen.gText(15, 110, "The pet is full!", greenColour, blackColour, 1, 1);
+          else myScreen.gText(5, 110, "The pet is starving!", redColour, blackColour, 1, 1);
+          delay(TIME_MESSAGE);          
+          digitalWrite(redLED,LOW);
+          digitalWrite(greenLED,LOW);
+          if(winGame) showMessage(40);
           return return_menu();  
           break;
 

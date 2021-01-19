@@ -176,6 +176,7 @@ void life()
     float diet = tmp006.readDieTempC();
   */
   if(life_pet>0){
+    if(life_pet<LOW_LIFE) rested=false;
     sprintf(string, "Health : %03d", life_pet);
     if(whiteLight==1) myScreen.gText(30, 20, string, blackColour, greenColour, 1, 1);
     else myScreen.gText(30, 20, string, greenColour, blackColour, 1, 1);

@@ -13,7 +13,9 @@
 
 #define BAR_LIMIT 18	//limit of the bar game (the value was obtained with a long sequence of trial & error)
 #define TIME_BAR  500  //time of delay for the loading of the bar
-#define TIME_SLEEP 10 //how much time the pet need to sleep
+#define TIME_SLEEP 60 //how much time the pet need to sleep
+
+#define LOW_LIFE 30 //the minimum amout of life for make the pet sleep
 
 char bar[BAR_LIMIT];  //array of char to simulate the bar loading
 int bar_loaded=0;     //contator for the loading

@@ -9,6 +9,22 @@ bool return_menu(){
   return false;
 }
 
+void initWalk(){
+  bar_loaded=0;
+  //initialize the bar
+  for(int x=0;x<11;x++) bar[x]='_';
+  bar[0]='|';
+  randOrientation=3;
+  winGame=false;
+  myScreen.gText(10, 10, "Tilt the board", yellowColour, blackColour, 1, 1);
+  myScreen.gText(10, 20, "to the top", yellowColour, blackColour, 1, 1);
+  myScreen.gText(10, 30, "to refill the bar.", yellowColour, blackColour, 1, 1);
+  myScreen.gText(10, 60, "Press button 2", redColour, blackColour, 1, 1);
+  myScreen.gText(10, 70, "to exit.", redColour, blackColour, 1, 1);
+  delay(5000);
+  myScreen.clear(blackColour);
+}
+
 void initPlay(){
   //drawBitmap(bmp);
   //myScreen.gText(5, 20, "Play with your pet!", blueColour, blackColour, 1, 1);
@@ -123,7 +139,36 @@ bool petSleep(){
 }
 
 bool petWalk(){
-  return false;
+  myScreen.setOrientation(randOrientation);
+  myScreen.gText(30,10,bar,greenColour,blackColour,1,1);
+  myScreen.gText(30,110,bar,greenColour,blackColour,1,1);
+  int analogValue;
+  analogReadResolution(12);
+  analogValue = analogRead(ypin); // read Y axis 
+  if(analogValue >2048){ // check if tilting on y axis in positive direction
+       if(bar_loaded<11){
+          bar[bar_loaded]='|';
+          bar_loaded++;
+       }else{
+          winGame=true;
+          digitalWrite(redLED,LOW);
+          digitalWrite(greenLED,HIGH);
+       }
+       delay(500);
+    } 
+    else { // check if tilting on y axis in negative direction 
+        if(bar_loaded>0){            
+          bar_loaded--;
+          bar[bar_loaded]='_';
+        }
+    }   
+  analogReadResolution(10);
+  buttonTwoState=digitalRead(buttonTwo);
+  if(buttonTwoState==LOW || winGame) {
+    myScreen.setOrientation(0);
+    return false;
+  }
+  else return true;
 }
 
 bool petEat(){
@@ -258,13 +303,17 @@ bool menu_pet()
           
       case 1: //walk
           myScreen.clear(blackColour);
+          initWalk();
           if(choice) drawBitmap(bmp);
           else drawBitmap(nc_bmp);
-          myScreen.gText(5, 20, "The pet is walking!", yellowColour, blackColour, 1, 1);
-          while(petWalk());
-          myScreen.gText(15, 110, "The pet had fun!", greenColour, blackColour, 1, 1);
+          myScreen.gText(5, 10, "The pet is walking!", yellowColour, blackColour, 1, 1);
+          while(petWalk());          
+          if(winGame) myScreen.gText(15, 110, "The pet had fun!", greenColour, blackColour, 1, 1);
+          else myScreen.gText(15, 110, "The pet is sad!", greenColour, blackColour, 1, 1);
           delay(TIME_MESSAGE);
-          showMessage(20);
+          digitalWrite(redLED,LOW);
+          digitalWrite(greenLED,LOW);
+          if(winGame) showMessage(80);
           return return_menu();  
           break;
           
@@ -274,15 +323,15 @@ bool menu_pet()
             if(choice) drawBitmap(bmp);
             else drawBitmap(nc_bmp);
             sleep=0;
-            //myScreen.gText(5, 20, "The pet is sleeping!", yellowColour, blackColour, 1, 1);
+            myScreen.gText(5, 110, "The pet is sleeping!", yellowColour, blackColour, 1, 1);
             while(petSleep());
             if(rested) myScreen.gText(5, 110, "The pet is rested!", greenColour, blackColour, 1, 1);
             else myScreen.gText(5, 110, "The pet is tired!", redColour, blackColour, 1, 1);
             delay(TIME_MESSAGE);
-            if(rested) showMessage(30);
+            if(rested) showMessage(200);
           }else{            
-            myScreen.gText(30, 50, "The pet is", yellowColour, blackColour, 1, 1);
-            myScreen.gText(30, 60, "already rested", yellowColour, blackColour, 1, 1);
+            myScreen.gText(20, 50, "The pet is", yellowColour, blackColour, 1, 1);
+            myScreen.gText(20, 60, "already rested", yellowColour, blackColour, 1, 1);
             delay(TIME_MESSAGE);
           }
           return return_menu();  

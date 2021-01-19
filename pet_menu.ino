@@ -12,7 +12,7 @@ bool return_menu(){
 void initWalk(){
   bar_loaded=0;
   //initialize the bar
-  for(int x=0;x<11;x++) bar[x]='_';
+  for(int x=0;x<11;x++) bar[x]='-';
   bar[0]='|';
   randOrientation=3;
   winGame=false;
@@ -27,7 +27,7 @@ void initWalk(){
 void initFood(){
   bar_loaded=0;
   //initialize the bar
-  for(int x=0;x<BAR_LIMIT;x++) bar[x]='_';
+  for(int x=0;x<BAR_LIMIT;x++) bar[x]='-';
   bar[0]='|';
   randOrientation=0;
   winGame=false;
@@ -44,7 +44,7 @@ void initPlay(){
   //myScreen.gText(5, 20, "Play with your pet!", blueColour, blackColour, 1, 1);
   bar_loaded=0;
   //initialize the bar
-  for(int x=0;x<BAR_LIMIT;x++) bar[x]='_';
+  for(int x=0;x<BAR_LIMIT;x++) bar[x]='-';
   bar[0]='|';
   
   //srand(time(0));   //use the time for the seed  
@@ -102,7 +102,7 @@ bool petPlay(){
       else { // check if tilting on x axis in negative direction 
           if(bar_loaded>0){            
             bar_loaded--;
-            bar[bar_loaded]='_';
+            bar[bar_loaded]='-';
           }
       }      
       
@@ -173,7 +173,7 @@ bool petWalk(){
     else { // check if tilting on y axis in negative direction 
         if(bar_loaded>0){            
           bar_loaded--;
-          bar[bar_loaded]='_';
+          bar[bar_loaded]='-';
         }
     }   
   analogReadResolution(10);
@@ -190,13 +190,12 @@ bool petEat(){
   if(bar_loaded<BAR_LIMIT){
       bar[bar_loaded]='|';
       bar_loaded++;          
-      delay(TIME_BAR);
+      delay(TIME_EAT);
    }else{
       winGame=true;
       digitalWrite(redLED,LOW);
       digitalWrite(greenLED,HIGH);
-   }
-  
+   }  
   
   buttonTwoState=digitalRead(buttonTwo);
   if(buttonTwoState==LOW || winGame) {

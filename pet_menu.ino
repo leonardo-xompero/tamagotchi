@@ -2,7 +2,8 @@
 bool return_menu(){
   if(blackLight==1)myScreen.clear(blackColour);
   else myScreen.clear(whiteColour);
-  drawBitmap(bmp);
+  if(choice) drawBitmap(bmp);
+  else drawBitmap(nc_bmp);
   choiceX=0;
   busyMenu=false;
   return false;
@@ -23,8 +24,8 @@ void initPlay(){
   myScreen.gText(10, 10, "Tilt the board", blueColour, blackColour, 1, 1);
   myScreen.gText(10, 20, "to the right", blueColour, blackColour, 1, 1);
   myScreen.gText(10, 30, "to refill the bar.", blueColour, blackColour, 1, 1);
-  myScreen.gText(10, 60, "Press button 2", blueColour, blackColour, 1, 1);
-  myScreen.gText(10, 70, "to exit.", blueColour, blackColour, 1, 1);
+  myScreen.gText(10, 60, "Press button 2", redColour, blackColour, 1, 1);
+  myScreen.gText(10, 70, "to exit.", redColour, blackColour, 1, 1);
   delay(5000);
   myScreen.clear(blackColour);
 }
@@ -223,7 +224,8 @@ bool menu_pet()
     {
       case 0: //dance
           myScreen.clear(blackColour);
-          drawBitmap(bmp);
+          if(choice) drawBitmap(bmp);
+          else drawBitmap(nc_bmp);
           myScreen.gText(5, 20, "The pet is dancing!", blueColour, blackColour, 1, 1);
           while(dance());
           myScreen.gText(15, 110, "The pet had fun!", blueColour, blackColour, 1, 1);
@@ -234,7 +236,8 @@ bool menu_pet()
           
       case 1: //walk
           myScreen.clear(blackColour);
-          drawBitmap(bmp);
+          if(choice) drawBitmap(bmp);
+          else drawBitmap(nc_bmp);
           myScreen.gText(5, 20, "The pet is walking!", blueColour, blackColour, 1, 1);
           //TODO : something
           myScreen.gText(15, 110, "The pet had fun!", blueColour, blackColour, 1, 1);
@@ -245,7 +248,8 @@ bool menu_pet()
           
       case 2: //sleep
           myScreen.clear(blackColour);
-          drawBitmap(bmp);
+          if(choice) drawBitmap(bmp);
+          else drawBitmap(nc_bmp);
           myScreen.gText(5, 20, "The pet is sleeping!", blueColour, blackColour, 1, 1);
           //TODO something
           myScreen.gText(15, 110, "The pet had fun!", blueColour, blackColour, 1, 1);
@@ -256,7 +260,8 @@ bool menu_pet()
           
       case 3: //eat
           myScreen.clear(blackColour);
-          drawBitmap(bmp);
+          if(choice) drawBitmap(bmp);
+          else drawBitmap(nc_bmp);
           myScreen.gText(5, 20, "The pet is eatingg!", blueColour, blackColour, 1, 1);
           //TODO something
           myScreen.gText(15, 110, "The pet had fun!", blueColour, blackColour, 1, 1);
@@ -270,7 +275,7 @@ bool menu_pet()
           initPlay();
           while(play());
           if(winGame) myScreen.gText(40, 80, "You WON!", blueColour, blackColour, 1, 1);
-          else myScreen.gText(40, 80, "You LOST!", blueColour, blackColour, 1, 1);
+          else myScreen.gText(40, 80, "You LOST!", redColour, blackColour, 1, 1);
           delay(TIME_MESSAGE);
           digitalWrite(redLED,LOW);
           digitalWrite(greenLED,LOW);

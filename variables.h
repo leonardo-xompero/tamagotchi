@@ -9,7 +9,7 @@
 #define CHOICE_INF 0    //lower limit of the choices
 #define CHOICE_SUP 5    //unper bound of the choice (the value is #choices-1)
 
-#define TIME_MESSAGE 2000   //variable for the delay for showing the message
+#define TIME_MESSAGE 3000   //variable for the delay for showing the message
 
 #define BAR_LIMIT 18	//limit of the bar game (the value was obtained with a long sequence of trial & error)
 #define TIME_BAR  500  //time of delay for the loading of the bar

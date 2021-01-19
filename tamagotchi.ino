@@ -33,7 +33,14 @@
 Screen_HX8353E myScreen;
 opt3001 opt3001;
 
-
+//initial message
+void intro(){
+  myScreen.gText(5, 30, "TAMAGOTCHI", orangeColour, blackColour, 2, 2);
+  myScreen.gText(60, 90, "by", orangeColour, blackColour, 1, 1);
+  myScreen.gText(15, 100, "Leonardo Xompero", orangeColour, blackColour, 1, 1);
+  delay(TIME_MESSAGE);
+  myScreen.clear(blackColour);
+}
 
 void beep(int note, int duration)
 {
@@ -193,7 +200,8 @@ void gameOver(){
   game_over=true;
   goMenu=false;
   myScreen.clear(blackColour);
-  drawBitmap(bmp);
+  if(choice) drawBitmap(bmp);
+  else drawBitmap(nc_bmp);
   myScreen.gText(30, 20, "Game Over", redColour, 1, 1);
 }
 
@@ -234,6 +242,7 @@ void light(){
 //initial menu for the choice, return a boolean for decide the next state
 bool menu()
 {
+  intro();
   //stay in the loop until the user makes a decision
   for (;;)
   {

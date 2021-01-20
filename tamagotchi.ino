@@ -51,8 +51,8 @@ void beep(int note, int duration)
 }
 
 
-//function for printing the images from an array of char
-void drawBitmap(const unsigned char *bmp)
+//function for printing the images from an array of char, with the dimension of the image
+void drawBitmap(const unsigned char *bmp, int x_image, int y_image)
 {
   uint32_t p;
   uint16_t c;
@@ -175,11 +175,37 @@ void life()
     float objt = tmp006.readObjTempC();
     float diet = tmp006.readDieTempC();
   */
-  if(life_pet>0){
-    if(life_pet<LOW_LIFE) rested=false;
+  if(life_pet>0){    
     sprintf(string, "Health : %03d", life_pet);
+    if(life_pet==LOW_LIFE) {
+      if(choice) drawBitmap(bmp,64,64);
+      else drawBitmap(pet2_weak,64,64);
+      rested=false;
+    }
+    if(life_pet>LOW_LIFE){
+      if(whiteLight==1) {
+        myScreen.gText(30, 10, string, blackColour, greenColour, 1, 1);
+        myScreen.gText(15, 110, "The pet is chill!", blackColour, greenColour, 1, 1);
+      }
+      else {
+        myScreen.gText(30, 10, string, greenColour, blackColour, 1, 1);
+        myScreen.gText(15, 110, "The pet is chill!", greenColour, blackColour, 1, 1);
+      }
+    }
+    else{
+      if(whiteLight==1) {
+        myScreen.gText(30, 10, string, blackColour, orangeColour, 1, 1);
+        myScreen.gText(15, 110, " The pet is weak!", blackColour, orangeColour, 1, 1);
+      }
+      else {
+        myScreen.gText(30, 10, string, orangeColour, blackColour, 1, 1);
+        myScreen.gText(15, 110, " The pet is weak!", orangeColour, blackColour, 1, 1);
+      }
+    }
+    /*
     if(whiteLight==1) myScreen.gText(30, 20, string, blackColour, greenColour, 1, 1);
     else myScreen.gText(30, 20, string, greenColour, blackColour, 1, 1);
+    */
     life_pet--;
   }
   else{
@@ -193,7 +219,7 @@ void life()
   myScreen.gText(30, 110, temp, greenColour, 1, 1);
   */
 
-  delay(1000);
+  delay(LIFE);
 }
 
 //in the game over, i block everything
@@ -201,9 +227,10 @@ void gameOver(){
   game_over=true;
   goMenu=false;
   myScreen.clear(blackColour);
-  if(choice) drawBitmap(bmp);
-  else drawBitmap(nc_bmp);
-  myScreen.gText(30, 20, "Game Over", redColour, 1, 1);
+  if(choice) drawBitmap(bmp,64,64);
+  else drawBitmap(pet2_dead,64,64);
+  myScreen.gText(30, 10, "Game Over", redColour, 1, 1);
+  myScreen.gText(15, 110, "The pet is dead!", redColour, blackColour, 1, 1);
 }
 
 void light(){
@@ -225,15 +252,15 @@ void light(){
   //sequence to check if there's some obstruction of the light
   if(blackLight==0 && whiteLight==1 && readings<LIGHT_LIMIT){
     myScreen.clear(blackColour);
-    if(choice) drawBitmap(bmp);
-    else drawBitmap(nc_bmp);
+    if(choice) drawBitmap(bmp,64,64);
+    else drawBitmap(pet2_calm,64,64);
     blackLight=1;
     whiteLight=0;
   }
   else if(blackLight==1 && whiteLight==0 && readings>=LIGHT_LIMIT){
     myScreen.clear(whiteColour);
-    if(choice) drawBitmap(bmp);
-    else drawBitmap(nc_bmp);
+    if(choice) drawBitmap(bmp,64,64);
+    else drawBitmap(pet2_calm,64,64);
     blackLight=0;
     whiteLight=1;
   }
@@ -309,13 +336,13 @@ void setup()
   if (menu())
   {
     myScreen.clear(whiteColour);
-    drawBitmap(bmp);
+    drawBitmap(bmp,64,64);
     choice=true;
   }
   else
   {
     myScreen.clear(whiteColour);
-    drawBitmap(nc_bmp);
+    drawBitmap(pet2_calm,64,64);
     choice=false;
   }
   goMenu=true;

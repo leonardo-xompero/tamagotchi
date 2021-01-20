@@ -2,8 +2,8 @@
 bool return_menu(){
   if(blackLight==1)myScreen.clear(blackColour);
   else myScreen.clear(whiteColour);
-  if(choice) drawBitmap(bmp);
-  else drawBitmap(nc_bmp);
+  if(choice) drawBitmap(bmp,64,64);
+  else drawBitmap(pet2_calm,64,64);
   choiceX=0;
   busyMenu=false;
   return false;
@@ -40,7 +40,7 @@ void initFood(){
 }
 
 void initPlay(){
-  //drawBitmap(bmp);
+  //drawBitmap(bmp,64,64);
   //myScreen.gText(5, 20, "Play with your pet!", blueColour, blackColour, 1, 1);
   bar_loaded=0;
   //initialize the bar
@@ -77,9 +77,10 @@ void showMessage(int points){
 //the random variables decides the axys of the screen
 bool petPlay(){
     myScreen.setOrientation(randOrientation);
-    myScreen.gText(10,50,"0",greenColour,blackColour,1,1);
-    myScreen.gText(115,50,"F",greenColour,blackColour,1,1);
-    myScreen.gText(10,60,bar,greenColour,blackColour,1,1);
+    myScreen.gText(50, 5, "Play!", yellowColour, blackColour, 1, 1);
+    myScreen.gText(10,10,"0",greenColour,blackColour,1,1);
+    myScreen.gText(115,10,"F",greenColour,blackColour,1,1);
+    myScreen.gText(10,20,bar,greenColour,blackColour,1,1);
     analogReadResolution(12);
     //foor the accelerometer, we need 12 bit, so we set it 
     int analogValue;
@@ -321,10 +322,12 @@ bool menu_pet()
     {
       case 0: //dance
           myScreen.clear(blackColour);
-          if(choice) drawBitmap(bmp);
-          else drawBitmap(nc_bmp);
+          if(choice) drawBitmap(bmp,64,64);
+          else drawBitmap(pet2_dance,64,64);
           myScreen.gText(5, 20, "The pet is dancing!", yellowColour, blackColour, 1, 1);
           while(petDance());
+          if(choice) drawBitmap(bmp,64,64);
+          else drawBitmap(pet2_happy1,64,64);
           myScreen.gText(15, 110, "The pet had fun!", greenColour, blackColour, 1, 1);
           delay(TIME_MESSAGE);
           showMessage(50);
@@ -334,12 +337,20 @@ bool menu_pet()
       case 1: //walk
           myScreen.clear(blackColour);
           initWalk();
-          if(choice) drawBitmap(bmp);
-          else drawBitmap(nc_bmp);
+          if(choice) drawBitmap(bmp,64,64);
+          else drawBitmap(pet2_walk,64,64);
           myScreen.gText(5, 10, "The pet is walking!", yellowColour, blackColour, 1, 1);
           while(petWalk());          
-          if(winGame) myScreen.gText(15, 110, "The pet had fun!", greenColour, blackColour, 1, 1);
-          else myScreen.gText(15, 110, "The pet is sad!", redColour, blackColour, 1, 1);
+          if(winGame) {
+            if(choice) drawBitmap(bmp,64,64);
+            else drawBitmap(pet2_happy1,64,64);
+            myScreen.gText(15, 110, "The pet had fun!", greenColour, blackColour, 1, 1);
+          }
+          else {
+            if(choice) drawBitmap(bmp,64,64);
+            else drawBitmap(pet2_sad1,64,64);
+            myScreen.gText(15, 110, "The pet is sad!", redColour, blackColour, 1, 1);
+          }
           delay(TIME_MESSAGE);
           digitalWrite(redLED,LOW);
           digitalWrite(greenLED,LOW);
@@ -350,13 +361,21 @@ bool menu_pet()
       case 2: //sleep
           myScreen.clear(blackColour);
           if(!rested){
-            if(choice) drawBitmap(bmp);
-            else drawBitmap(nc_bmp);
+            if(choice) drawBitmap(bmp,64,64);
+            else drawBitmap(pet2_sleep,64,64);
             sleep=0;
-            myScreen.gText(5, 110, "The pet is sleeping!", yellowColour, blackColour, 1, 1);
+            myScreen.gText(5, 110, "The pet is asleep!", yellowColour, blackColour, 1, 1);
             while(petSleep());
-            if(rested) myScreen.gText(5, 110, "The pet is rested!", greenColour, blackColour, 1, 1);
-            else myScreen.gText(5, 110, "The pet is tired!", redColour, blackColour, 1, 1);
+            if(rested){
+              if(choice) drawBitmap(bmp,64,64);
+              else drawBitmap(pet2_happy1,64,64);
+              myScreen.gText(5, 110, "The pet is rested!", greenColour, blackColour, 1, 1);
+            }
+            else {
+              if(choice) drawBitmap(bmp,64,64);
+              else drawBitmap(pet2_sad1,64,64);
+              myScreen.gText(5, 110, "The pet is tired! ", redColour, blackColour, 1, 1);
+            }
             delay(TIME_MESSAGE);
             if(rested) showMessage(200);
           }else{            
@@ -370,12 +389,20 @@ bool menu_pet()
       case 3: //eat
           myScreen.clear(blackColour);          
           initFood();
-          if(choice) drawBitmap(bmp);
-          else drawBitmap(nc_bmp);
+          if(choice) drawBitmap(bmp,64,64);
+          else drawBitmap(pet2_food,64,64);
           myScreen.gText(5, 20, "The pet is eating!", yellowColour, blackColour, 1, 1);
           while(petEat());
-          if(winGame) myScreen.gText(15, 110, "The pet is full!", greenColour, blackColour, 1, 1);
-          else myScreen.gText(5, 110, "The pet is starving!", redColour, blackColour, 1, 1);
+          if(winGame) {
+            if(choice) drawBitmap(bmp,64,64);
+            else drawBitmap(pet2_happy1,64,64);
+            myScreen.gText(15, 110, "The pet is full!", greenColour, blackColour, 1, 1);
+          }
+          else {
+            if(choice) drawBitmap(bmp,64,64);
+            else drawBitmap(pet2_sad1,64,64);
+            myScreen.gText(5, 110, "The pet is starving!", redColour, blackColour, 1, 1);
+          }
           delay(TIME_MESSAGE);          
           digitalWrite(redLED,LOW);
           digitalWrite(greenLED,LOW);
@@ -386,9 +413,19 @@ bool menu_pet()
       case 4: //play
           myScreen.clear(blackColour);          
           initPlay();
+          if(choice) drawBitmap(bmp,64,64);
+          else drawBitmap(pet2_play,64,64);
           while(petPlay());
-          if(winGame) myScreen.gText(40, 80, "You WON!", greenColour, blackColour, 1, 1);
-          else myScreen.gText(40, 80, "You LOST!", redColour, blackColour, 1, 1);
+          if(winGame){
+            if(choice) drawBitmap(bmp,64,64);
+            else drawBitmap(pet2_happy1,64,64);
+            myScreen.gText(40, 110, "You WON!", greenColour, blackColour, 1, 1);
+          }
+          else {
+            if(choice) drawBitmap(bmp,64,64);
+            else drawBitmap(pet2_sad1,64,64);
+            myScreen.gText(40, 110, "You LOST!", redColour, blackColour, 1, 1);
+          }
           delay(TIME_MESSAGE);
           digitalWrite(redLED,LOW);
           digitalWrite(greenLED,LOW);

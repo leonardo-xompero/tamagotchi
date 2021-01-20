@@ -1,7 +1,4 @@
 // Define variables and constants
-//size of the image
-#define x_image 64
-#define y_image 64
 
 #define LIGHT_LIMIT 80		//limit of light value to change background
 #define LIFE_PET 100		//life of the pet
@@ -17,6 +14,7 @@
 #define TIME_EAT 1000 //time to eat
 
 #define LOW_LIFE 30 //the minimum amout of life for make the pet sleep
+#define LIFE 1000 //duration of a unit of life
 
 char bar[BAR_LIMIT];  //array of char to simulate the bar loading
 int bar_loaded=0;     //contator for the loading

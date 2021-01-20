@@ -9,6 +9,15 @@ bool return_menu(){
   return false;
 }
 
+void initDance(){  
+  myScreen.gText(10, 40, "Listen to the song", yellowColour, blackColour, 1, 1);
+  myScreen.gText(10, 50, "OR", yellowColour, blackColour, 1, 1);
+  myScreen.gText(10, 60, "press button 2", yellowColour, blackColour, 1, 1);
+  myScreen.gText(10, 70, "to skip.", yellowColour, blackColour, 1, 1);
+  delay(TIME_MESSAGE);
+  myScreen.clear(blackColour);
+}
+
 void initWalk(){
   bar_loaded=0;
   //initialize the bar
@@ -322,6 +331,7 @@ bool menu_pet()
     {
       case 0: //dance
           myScreen.clear(blackColour);
+          initDance();
           if(choice) drawBitmap(bmp,64,64);
           else drawBitmap(pet2_dance,64,64);
           myScreen.gText(5, 20, "The pet is dancing!", yellowColour, blackColour, 1, 1);

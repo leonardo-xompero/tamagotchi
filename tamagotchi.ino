@@ -104,6 +104,37 @@ void drawBitmap(const unsigned char *bmp, int x_image, int y_image)
   }
 }
 
+//function to draw the mini-images at the beginning, you need to pass the position of the image
+void drawMiniBitmap(const unsigned char *bmp, int x_image, int y_image, int pos_x, int pos_y)
+{
+  uint32_t p;
+  uint16_t c;
+  uint16_t x00 = pos_x;
+  uint16_t y00 = pos_y;
+
+  uint16_t ca;
+  unsigned char cu;
+  unsigned char cl;
+  uint16_t x = x_image;
+  uint16_t y = y_image;
+  for (uint16_t j = 0; j < y; j++)
+  {
+    for (uint16_t i = 0; i < x; i++)
+      {
+        
+          cu = bmp[(j * 2) * x + 5 + (i * 2)];
+          cl = bmp[(j * 2) * x + 5 + (i * 2) + 1];
+          c = cu;
+          c = c << 8;
+          c |= 0x00FF;
+          ca = cl;
+          ca |= 0xFF00;
+          c &= ca;
+          myScreen.point(x00 + i, y00 + j, c);        
+      }
+  }
+}
+
 
 float getTemp(void)
 {
@@ -272,6 +303,8 @@ bool menu()
 {
   intro();
   myScreen.gText(20, 20, "Choose your pet", yellowColour, blackColour, 1, 1);
+  //drawMiniBitmap(pet2_hi,48,48,10,40);
+  drawMiniBitmap(pet2_hi,48,48,70,40);
   //stay in the loop until the user makes a decision
   for (;;)
   {
@@ -290,15 +323,15 @@ bool menu()
     switch (menu_step)
     {
       case false:
-        myScreen.gText(30, 60, "pet1", myScreen.reverseColour(greenColour), blackColour, 1,
+        myScreen.gText(20, 100, "pet1", myScreen.reverseColour(greenColour), blackColour, 1,
                        1);
-        myScreen.gText(80, 60, "pet2", greenColour, blackColour, 1,
+        myScreen.gText(80, 100, "pet2", greenColour, blackColour, 1,
                        1);
         break;
       case true:
-        myScreen.gText(30, 60, "pet1", greenColour, blackColour, 1,
+        myScreen.gText(20, 100, "pet1", greenColour, blackColour, 1,
                        1);
-        myScreen.gText(80, 60, "pet2", myScreen.reverseColour(greenColour), blackColour,
+        myScreen.gText(80, 100, "pet2", myScreen.reverseColour(greenColour), blackColour,
                        1, 1);
         break;
     }

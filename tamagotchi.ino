@@ -272,9 +272,9 @@ void light(){
   // Read OPT3001
   readings = opt3001.readResult();  //min = 0, max = 131040
   
-  backlight = map(readings,darkestLUX, brightestLUX, dimmestBacklight, brightestBacklight);  //simple linear backlight
-  backlight = constrain(backlight, dimmestBacklight, brightestBacklight);  // keep value between the acceptable value of analogWrite()
-  analogWrite(backlightPin, backlight);
+  //backlight = map(readings,darkestLUX, brightestLUX, dimmestBacklight, brightestBacklight);  //simple linear backlight
+  //backlight = constrain(backlight, dimmestBacklight, brightestBacklight);  // keep value between the acceptable value of analogWrite()
+  //analogWrite(backlightPin, backlight);
   
   
   //sprintf(temp, "Light : %2d", readings); //doesn't work without that (don't know why, to check later)
@@ -308,13 +308,17 @@ bool menu()
   //stay in the loop until the user makes a decision
   for (;;)
   {
+    //check if the user is using the joystick
     joystickXState = analogRead(joystickX);
+    //mapping the interrupt result
     joystickXState = map(joystickXState, 0, 4096, 0, 255);
+    //if the joystick goes to the left
     if (joystickXState < 10)
     {
       beep(NOTE_C6, 125);  
       menu_step = false;
     }
+    //if the choice go to the right
     else if (joystickXState > 60)
     {
       beep(NOTE_C6, 125); 

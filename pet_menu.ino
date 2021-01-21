@@ -464,11 +464,14 @@ void menu_pet_loop()
 {
   //if i made the choice in the menu, then i can start the task
   if(goMenu){
+    //read the interrupt (when the user press the buttonTwo)
     buttonTwoState=digitalRead(buttonTwo);
+    // check if the state of the button is LOW(is pressed)
     if(buttonTwoState==LOW){
+      //set the semaphore of the menu to true
       busyMenu=true;
       myScreen.clear(blackColour);
-      //continuos cycle in the menu until a function is selected or exited
+      //shows the menu
       while(menu_pet());
     }
   }

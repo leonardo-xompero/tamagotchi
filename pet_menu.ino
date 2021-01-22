@@ -9,6 +9,22 @@ bool return_menu(){
   return false;
 }
 
+int checkOutside(){
+  int tempOk;
+  float temp=temperature();
+  if(temp<MIN_TEMP) tempOk=-1;
+  else if(temp>MAX_TEMP) tempOk=1;
+  else tempOk=0;
+  delay(TIME_MESSAGE);
+  if(tempOk==0){
+    myScreen.gText(10,90,"The pet wants to" , greenColour);
+    myScreen.gText(10,100,"go outside!" , greenColour);
+    delay(TIME_MESSAGE);
+  }
+  myScreen.clear(blackColour);
+  return tempOk;
+}
+
 void initDance(){  
   myScreen.gText(10, 40, "Listen to the song", yellowColour, blackColour, 1, 1);
   myScreen.gText(10, 50, "OR", yellowColour, blackColour, 1, 1);
@@ -346,25 +362,41 @@ bool menu_pet()
           
       case 1: //walk
           myScreen.clear(blackColour);
-          initWalk();
-          if(choice) drawBitmap(bmp,64,64);
-          else drawBitmap(pet2_walk,64,64);
-          myScreen.gText(5, 10, "The pet is walking!", yellowColour, blackColour, 1, 1);
-          while(petWalk());          
-          if(winGame) {
+          tempOutside=checkOutside();
+          if(tempOutside==0){
+            initWalk();
             if(choice) drawBitmap(bmp,64,64);
-            else drawBitmap(pet2_happy1,64,64);
-            myScreen.gText(15, 110, "The pet had fun!", greenColour, blackColour, 1, 1);
+            else drawBitmap(pet2_walk,64,64);
+            myScreen.gText(5, 10, "The pet is walking!", yellowColour, blackColour, 1, 1);
+            while(petWalk());          
+            if(winGame) {
+              if(choice) drawBitmap(bmp,64,64);
+              else drawBitmap(pet2_happy1,64,64);
+              myScreen.gText(15, 110, "The pet had fun!", greenColour, blackColour, 1, 1);
+            }
+            else {
+              if(choice) drawBitmap(bmp,64,64);
+              else drawBitmap(pet2_sad1,64,64);
+              myScreen.gText(15, 110, "The pet is sad!", redColour, blackColour, 1, 1);
+            }
+            delay(TIME_MESSAGE);
+            digitalWrite(redLED,LOW);
+            digitalWrite(greenLED,LOW);
+            if(winGame) showMessage(80);
           }
-          else {
-            if(choice) drawBitmap(bmp,64,64);
-            else drawBitmap(pet2_sad1,64,64);
-            myScreen.gText(15, 110, "The pet is sad!", redColour, blackColour, 1, 1);
+          else if(tempOutside<0){
+            myScreen.gText(15, 30, "It's too COLD!", blueColour, blackColour, 1, 1);
+            myScreen.gText(15, 50, "The pet ", blueColour, blackColour, 1, 1);
+            myScreen.gText(15, 60, "doesn't want", blueColour, blackColour, 1, 1);
+            myScreen.gText(15, 70, "to go outside!", blueColour, blackColour, 1, 1);
+            delay(TIME_MESSAGE);
+          }else{
+            myScreen.gText(15, 30, "It's too HOT!", redColour, blackColour, 1, 1);
+            myScreen.gText(15, 50, "The pet ", redColour, blackColour, 1, 1);
+            myScreen.gText(15, 60, "doesn't want", redColour, blackColour, 1, 1);
+            myScreen.gText(15, 70, "to go outside!", redColour, blackColour, 1, 1);
+            delay(TIME_MESSAGE);
           }
-          delay(TIME_MESSAGE);
-          digitalWrite(redLED,LOW);
-          digitalWrite(greenLED,LOW);
-          if(winGame) showMessage(80);
           return return_menu();  
           break;
           

@@ -1,3 +1,6 @@
+#include <Adafruit_TMP006.h>
+#include <itoa.h>
+
 // Core library for code-sense
 #if defined(ENERGIA) // LaunchPad MSP430, Stellaris and Tiva, Experimeter Board FR5739 specific
 #include "Energia.h"
@@ -32,6 +35,7 @@
 
 Screen_HX8353E myScreen;
 opt3001 opt3001;
+Adafruit_TMP006 tmp006;
 
 //initial message
 void intro(){
@@ -135,6 +139,37 @@ void drawMiniBitmap(const unsigned char *bmp, int x_image, int y_image, int pos_
   }
 }
 
+void microphone(){
+   while(analogRead(mic) <  100); myScreen.gText(50,20, " Passed!", redColour);
+}
+
+char *ftoa(char *a, float f, int precision)
+{
+  long p[] = {0,10,100,1000,10000,100000,1000000,10000000,100000000};
+  
+  char *ret = a;
+  long heiltal = (long)f;
+  itoa(heiltal, a, 10);
+  while (*a != '\0') a++;
+  *a++ = '.';
+  long desimal = abs((long)((f - heiltal) * p[precision]));
+  itoa(desimal, a, 10);
+  return ret;
+}
+
+float temperature(){
+  float temp = tmp006.readObjTempC();
+  char* tempText;
+  char ii;
+  tempText = (char*) malloc(10);
+  for (ii=0;ii<10;ii++) tempText[ii] = 0;
+  tempText =  ftoa(tempText, temp, 4);
+  myScreen.gText(20,30,"Current" , orangeColour);
+  myScreen.gText(20,40,"temperature: " , orangeColour);
+  myScreen.gText(40,60,(char*)tempText , orangeColour);
+  myScreen.gText(70,60, "*C", orangeColour);  
+  return temp;
+}
 
 float getTemp(void)
 {
@@ -327,15 +362,15 @@ bool menu()
     switch (menu_step)
     {
       case false:
-        myScreen.gText(20, 100, "pet1", myScreen.reverseColour(greenColour), blackColour, 1,
+        myScreen.gText(20, 100, "pet1", orangeColour, blueColour, 1,
                        1);
-        myScreen.gText(80, 100, "pet2", greenColour, blackColour, 1,
+        myScreen.gText(80, 100, "pet2", orangeColour, blackColour, 1,
                        1);
         break;
       case true:
-        myScreen.gText(20, 100, "pet1", greenColour, blackColour, 1,
+        myScreen.gText(20, 100, "pet1", orangeColour, blackColour, 1,
                        1);
-        myScreen.gText(80, 100, "pet2", myScreen.reverseColour(greenColour), blackColour,
+        myScreen.gText(80, 100, "pet2", orangeColour, blueColour,
                        1, 1);
         break;
     }
@@ -361,7 +396,8 @@ void setup()
   myScreen.begin();
   //initialized the sensor for the light
   opt3001.begin(); 
-  
+  //temperature
+  tmp006.begin(TMP006_CFG_8SAMPLE);
   //initialize the buzzer
   pinMode(buzzerPin,OUTPUT);
 

@@ -16,6 +16,11 @@
 #define LOW_LIFE 30 //the minimum amout of life for make the pet sleep
 #define LIFE 1000 //duration of a unit of life
 
+#define MIN_TEMP 20 //min temperature before it's considered cold
+#define MAX_TEMP 30 //max temperature before it's considered hot
+
+int tempOutside; //flag to check the temperature outside
+
 char bar[BAR_LIMIT];  //array of char to simulate the bar loading
 int bar_loaded=0;     //contator for the loading
 int randOrientation;  //variable generated randomly, needed for the random inclination of the bar (not implemented)
@@ -38,6 +43,8 @@ const int ledRed = 39;        // the number of the LED pin
 const int joystickSel = 5;     // the number of the joystick select pin
 const int joystickX = 2;       // the number of the joystick X-axis analog
 const int joystickY = 26;     // the number of the joystick Y-axis analog
+
+const int mic = 6;    //pin for the microphone
 
 // variables will change:
 int buttonOneState = 0;         // variable for reading the pushbutton #1 status
@@ -65,6 +72,9 @@ int buzzerPin = 40;		//pin for the buzzer
 
 //float fTemp;
 char temp[8];
+
+//variable for the temperature
+float tempReading = 0;
 
 //variables for checking the background
 int blackLight=0;

@@ -244,7 +244,7 @@ void life()
   if(life_pet>0){    
     sprintf(string, "Health : %03d", life_pet);
     if(life_pet==LOW_LIFE) {
-      if(choice) drawBitmap(bmp,64,64);
+      if(choice) drawBitmap(pet1_weak,64,64);
       else drawBitmap(pet2_weak,64,64);
       rested=false;
     }
@@ -293,7 +293,7 @@ void gameOver(){
   game_over=true;
   goMenu=false;
   myScreen.clear(blackColour);
-  if(choice) drawBitmap(bmp,64,64);
+  if(choice) drawBitmap(pet1_dead,64,64);
   else drawBitmap(pet2_dead,64,64);
   myScreen.gText(30, 10, "Game Over", redColour, 1, 1);
   myScreen.gText(15, 110, "The pet is dead!", redColour, blackColour, 1, 1);
@@ -318,14 +318,14 @@ void light(){
   //sequence to check if there's some obstruction of the light
   if(blackLight==0 && whiteLight==1 && readings<LIGHT_LIMIT){
     myScreen.clear(blackColour);
-    if(choice) drawBitmap(bmp,64,64);
+    if(choice) drawBitmap(pet1_calm,64,64);
     else drawBitmap(pet2_calm,64,64);
     blackLight=1;
     whiteLight=0;
   }
   else if(blackLight==1 && whiteLight==0 && readings>=LIGHT_LIMIT){
     myScreen.clear(whiteColour);
-    if(choice) drawBitmap(bmp,64,64);
+    if(choice) drawBitmap(pet1_calm,64,64);
     else drawBitmap(pet2_calm,64,64);
     blackLight=0;
     whiteLight=1;
@@ -338,7 +338,7 @@ bool menu()
 {
   intro();
   myScreen.gText(20, 20, "Choose your pet", yellowColour, blackColour, 1, 1);
-  //drawMiniBitmap(pet2_hi,48,48,10,40);
+  drawMiniBitmap(pet1_hi,48,48,10,40);
   drawMiniBitmap(pet2_hi,48,48,70,40);
   //stay in the loop until the user makes a decision
   for (;;)
@@ -409,7 +409,7 @@ void setup()
   if (menu())
   {
     myScreen.clear(whiteColour);
-    drawBitmap(bmp,64,64);
+    drawBitmap(pet1_calm,64,64);
     choice=true;
   }
   else

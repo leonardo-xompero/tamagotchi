@@ -342,7 +342,7 @@ void light(){
     blackLight=0;
     whiteLight=1;
   }
-  delay(100);
+  //delay(10);
 }
 
 //initial menu for the choice, return a boolean for decide the next state

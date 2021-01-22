@@ -1,9 +1,14 @@
 //function for return the previous menu
 bool return_menu(){
   if(blackLight==1)myScreen.clear(blackColour);
-  else myScreen.clear(whiteColour);
-  if(choice) drawBitmap(pet1_calm,64,64);
-  else drawBitmap(pet2_calm,64,64);
+  else myScreen.clear(whiteColour);  
+  if(life_pet>=LOW_LIFE){
+      if(choice) drawBitmap(pet1_calm,64,64);
+      else drawBitmap(pet2_calm,64,64);
+  }else{
+    if(choice) drawBitmap(pet1_weak,64,64);
+    else drawBitmap(pet2_weak,64,64);
+  }
   choiceX=0;
   busyMenu=false;
   return false;

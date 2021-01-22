@@ -248,7 +248,7 @@ void life()
       else drawBitmap(pet2_weak,64,64);
       rested=false;
     }
-    if(life_pet>LOW_LIFE){
+    if(life_pet>=LOW_LIFE){
       if(whiteLight==1) {
         myScreen.gText(30, 10, string, blackColour, greenColour, 1, 1);
         myScreen.gText(15, 110, "The pet is chill!", blackColour, greenColour, 1, 1);
@@ -261,12 +261,13 @@ void life()
     else{
       if(whiteLight==1) {
         myScreen.gText(30, 10, string, blackColour, orangeColour, 1, 1);
-        myScreen.gText(15, 110, " The pet is weak!", blackColour, orangeColour, 1, 1);
+        myScreen.gText(15, 110, " The pet is weak!", blackColour, orangeColour, 1, 1);        
       }
       else {
         myScreen.gText(30, 10, string, orangeColour, blackColour, 1, 1);
         myScreen.gText(15, 110, " The pet is weak!", orangeColour, blackColour, 1, 1);
       }
+      
     }
     /*
     if(whiteLight==1) myScreen.gText(30, 20, string, blackColour, greenColour, 1, 1);
@@ -318,15 +319,26 @@ void light(){
   //sequence to check if there's some obstruction of the light
   if(blackLight==0 && whiteLight==1 && readings<LIGHT_LIMIT){
     myScreen.clear(blackColour);
-    if(choice) drawBitmap(pet1_calm,64,64);
-    else drawBitmap(pet2_calm,64,64);
+    if(life_pet>=LOW_LIFE){
+      if(choice) drawBitmap(pet1_calm,64,64);
+      else drawBitmap(pet2_calm,64,64);
+    }else{
+      if(choice) drawBitmap(pet1_weak,64,64);
+      else drawBitmap(pet2_weak,64,64);
+    }
     blackLight=1;
     whiteLight=0;
+    
   }
   else if(blackLight==1 && whiteLight==0 && readings>=LIGHT_LIMIT){
     myScreen.clear(whiteColour);
-    if(choice) drawBitmap(pet1_calm,64,64);
-    else drawBitmap(pet2_calm,64,64);
+    if(life_pet>=LOW_LIFE){
+      if(choice) drawBitmap(pet1_calm,64,64);
+      else drawBitmap(pet2_calm,64,64);
+    }else{
+      if(choice) drawBitmap(pet1_weak,64,64);
+      else drawBitmap(pet2_weak,64,64);
+    }
     blackLight=0;
     whiteLight=1;
   }

@@ -330,11 +330,12 @@ bool menu_pet()
     switch (choiceX)
     {
       case 0: //dance
+          beep(NOTE_B5, 125);
           myScreen.clear(blackColour);
           initDance();
           if(choice) drawBitmap(pet1_dance,64,64);
           else drawBitmap(pet2_dance,64,64);
-          myScreen.gText(5, 20, "The pet is dancing!", yellowColour, blackColour, 1, 1);
+          myScreen.gText(5, 10, "The pet is dancing!", yellowColour, blackColour, 1, 1);
           while(petDance());
           if(choice) drawBitmap(pet1_happy,64,64);
           else drawBitmap(pet2_happy1,64,64);
@@ -345,6 +346,7 @@ bool menu_pet()
           break;
           
       case 1: //walk
+          beep(NOTE_B5, 125);
           myScreen.clear(blackColour);
           tempOutside=checkOutside();
           if(tempOutside==0){
@@ -385,6 +387,7 @@ bool menu_pet()
           break;
           
       case 2: //sleep
+          beep(NOTE_B5, 125);
           myScreen.clear(blackColour);
           if(!rested){
             if(choice) drawBitmap(pet1_sleep,64,64);
@@ -413,6 +416,7 @@ bool menu_pet()
           break;
           
       case 3: //eat
+          beep(NOTE_B5, 125);
           myScreen.clear(blackColour);          
           initFood();
           if(choice) drawBitmap(pet1_food,64,64);
@@ -437,6 +441,7 @@ bool menu_pet()
           break;
 
       case 4: //play
+          beep(NOTE_B5, 125);
           myScreen.clear(blackColour);          
           initPlay();
           if(choice) drawBitmap(pet1_play,64,64);

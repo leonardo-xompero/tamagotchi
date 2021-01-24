@@ -389,12 +389,12 @@ bool menu()
     buttonOneState = digitalRead(buttonOne);
     if (buttonOneState == LOW && !menu_step)
     {
-      beep(NOTE_GS3, 125);  
+      beep(NOTE_B5, 125);  
       return true;
     }
     else if (buttonOneState == LOW && menu_step)
     {
-      beep(NOTE_GS3, 125);  
+      beep(NOTE_B5, 125);  
       return false;
     }
   }

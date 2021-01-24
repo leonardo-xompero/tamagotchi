@@ -139,9 +139,12 @@ void drawMiniBitmap(const unsigned char *bmp, int x_image, int y_image, int pos_
   }
 }
 
+/* MICROPHONE SENSOR
 void microphone(){
-   while(analogRead(mic) <  100); myScreen.gText(50,20, " Passed!", redColour);
+   while(analogRead(mic) <  100); 
+   myScreen.gText(50,20, " Micro tapped!", redColour);
 }
+*/
 
 char *ftoa(char *a, float f, int precision)
 {
@@ -157,12 +160,15 @@ char *ftoa(char *a, float f, int precision)
   return ret;
 }
 
+//check the temperature using Energia Lib (AdaFruit)
 float temperature(){
+  //takes the temperature
   float temp = tmp006.readObjTempC();
   char* tempText;
   char ii;
   tempText = (char*) malloc(10);
   for (ii=0;ii<10;ii++) tempText[ii] = 0;
+  //convert the float to char
   tempText =  ftoa(tempText, temp, 4);
   myScreen.gText(20,30,"Current" , orangeColour);
   myScreen.gText(20,40,"temperature: " , orangeColour);
@@ -171,6 +177,7 @@ float temperature(){
   return temp;
 }
 
+/* TEMPERATURE WITH DRIVERLIB
 float getTemp(void)
 {
   uint32_t cal30;
@@ -182,26 +189,25 @@ float getTemp(void)
 
 
 
-  /* Initializing ADC (MCLK/1/1) with temperature sensor routed */
+  // Initializing ADC (MCLK/1/1) with temperature sensor routed 
   ADC14_enableModule();
   ADC14_initModule(ADC_CLOCKSOURCE_MCLK, ADC_PREDIVIDER_1, ADC_DIVIDER_1,
                    ADC_TEMPSENSEMAP);
 
-  /* Configuring ADC Memory (ADC_MEM0 A22 (Temperature Sensor) in repeat
+  // Configuring ADC Memory (ADC_MEM0 A22 (Temperature Sensor) in repeat
      mode).
-  */
   ADC14_configureSingleSampleMode(ADC_MEM0, true);
   ADC14_configureConversionMemory(ADC_MEM0, ADC_VREFPOS_INTBUF_VREFNEG_VSS,
                                   ADC_INPUT_A22, false);
 
-  /* Configuring the sample/hold time for 192 */
+  // Configuring the sample/hold time for 192 
   ADC14_setSampleHoldTime(ADC_PULSE_WIDTH_192, ADC_PULSE_WIDTH_192);
 
-  /* Enabling sample timer in auto iteration mode and interrupts*/
+  // Enabling sample timer in auto iteration mode and interrupts
   ADC14_enableSampleTimer(ADC_AUTOMATIC_ITERATION);
   ADC14_enableInterrupt(ADC_INT0);
 
-  /* Setting reference voltage to 2.5 and enabling temperature sensor */
+  // Setting reference voltage to 2.5 and enabling temperature sensor 
   REF_A_enableTempSensor();
   REF_A_setReferenceVoltage(REF_A_VREF2_5V);
   REF_A_enableReferenceVoltage();
@@ -212,7 +218,7 @@ float getTemp(void)
           SYSCTL_85_DEGREES_C);
   calDifference = cal85 - cal30;
 
-  /* Triggering the start of the sample */
+  // Triggering the start of the sample
   ADC14_enableConversion();
   ADC14_toggleConversionTrigger();
 
@@ -226,21 +232,16 @@ float getTemp(void)
   tempC = (conRes / calDifference) + 30.0f;
   //tempF = tempC * 9.0f / 5.0f + 32.0f;
 
-  /* clear out last sample */
+  // clear out last sample 
   MAP_ADC14_clearInterruptFlag(status);
-
-
   return tempC;
-
 }
+*/
 
 //function for the life of the pet
 void life()
 {
-  /*
-    float objt = tmp006.readObjTempC();
-    float diet = tmp006.readDieTempC();
-  */
+  //check the life of the pet for decide if using the normal pet or the weak pet
   if(life_pet>0){    
     sprintf(string, "Health : %03d", life_pet);
     if(life_pet==LOW_LIFE) {
@@ -269,22 +270,11 @@ void life()
       }
       
     }
-    /*
-    if(whiteLight==1) myScreen.gText(30, 20, string, blackColour, greenColour, 1, 1);
-    else myScreen.gText(30, 20, string, greenColour, blackColour, 1, 1);
-    */
     life_pet--;
   }
   else{
     gameOver();
   }
-
-
-  /*
-  fTemp = getTemp();
-  sprintf(temp, "Temp : %f", fTemp);
-  myScreen.gText(30, 110, temp, greenColour, 1, 1);
-  */
 
   delay(LIFE);
 }
@@ -307,14 +297,6 @@ void light(){
   temp[0]='\0';
   // Read OPT3001
   readings = opt3001.readResult();  //min = 0, max = 131040
-  
-  //backlight = map(readings,darkestLUX, brightestLUX, dimmestBacklight, brightestBacklight);  //simple linear backlight
-  //backlight = constrain(backlight, dimmestBacklight, brightestBacklight);  // keep value between the acceptable value of analogWrite()
-  //analogWrite(backlightPin, backlight);
-  
-  
-  //sprintf(temp, "Light : %2d", readings); //doesn't work without that (don't know why, to check later)
-  //myScreen.gText(30, 110, temp, greenColour, 1, 1);
 
   //sequence to check if there's some obstruction of the light
   if(blackLight==0 && whiteLight==1 && readings<LIGHT_LIMIT){
@@ -408,7 +390,7 @@ void setup()
   myScreen.begin();
   //initialized the sensor for the light
   opt3001.begin(); 
-  //temperature
+  //initialize the temperature sensor
   tmp006.begin(TMP006_CFG_8SAMPLE);
   //initialize the buzzer
   pinMode(buzzerPin,OUTPUT);

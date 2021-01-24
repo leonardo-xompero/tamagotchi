@@ -14,9 +14,10 @@ bool return_menu(){
   return false;
 }
 
+//check the temperature and then decide if launching the "walk" function or not
 int checkOutside(){
   int tempOk;
-  float temp=temperature();
+  float temp=temperature();   //return the temperature
   if(temp<MIN_TEMP) tempOk=-1;
   else if(temp>MAX_TEMP) tempOk=1;
   else tempOk=0;
@@ -70,8 +71,6 @@ void initFood(){
 }
 
 void initPlay(){
-  //drawBitmap(bmp,64,64);
-  //myScreen.gText(5, 20, "Play with your pet!", blueColour, blackColour, 1, 1);
   bar_loaded=0;
   //initialize the bar
   for(int x=0;x<BAR_LIMIT;x++) bar[x]='-';

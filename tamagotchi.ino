@@ -251,11 +251,11 @@ void life()
     if(life_pet>=LOW_LIFE){
       if(whiteLight==1) {
         myScreen.gText(30, 10, string, blackColour, greenColour, 1, 1);
-        myScreen.gText(15, 110, "The pet is chill!", blackColour, greenColour, 1, 1);
+        myScreen.gText(15, 110, "The pet is calm!", blackColour, greenColour, 1, 1);
       }
       else {
         myScreen.gText(30, 10, string, greenColour, blackColour, 1, 1);
-        myScreen.gText(15, 110, "The pet is chill!", greenColour, blackColour, 1, 1);
+        myScreen.gText(15, 110, "The pet is calm!", greenColour, blackColour, 1, 1);
       }
     }
     else{

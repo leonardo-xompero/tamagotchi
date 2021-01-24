@@ -138,27 +138,6 @@ bool petPlay(){
       }      
       
     }
-    /*else{
-      // CHECK Y AXIS (green) 
-      analogValue = analogRead(ypin); // read Y axis 
-      if(analogValue >2048){ // check if tilting on Y axis in positive direction 
-          if(bar_loaded<BAR_LIMIT){
-            bar[bar_loaded]='|';
-            bar_loaded++;
-         }else{
-            winGame=true;
-            digitalWrite(redLED,LOW);
-            digitalWrite(greenLED,HIGH);
-         }
-      } 
-      else if(analogValue<2048){ // check if tilting on Y axis in negative direction 
-        if(bar_loaded>0){          
-            bar_loaded--;
-            bar[bar_loaded]='_';
-          }
-      } 
-    }
-    */
   //now we need to set the default value for msp432
   analogReadResolution(10);
   buttonTwoState=digitalRead(buttonTwo);
@@ -254,7 +233,7 @@ bool petDance(){
     // we only play the note for 90% of the duration, leaving 10% as a pause
     tone(buzzerPin, melody[thisNote], noteDuration * 0.9);
 
-    // Wait for the specief duration before playing the next note.
+    // Wait for the special duration before playing the next note.
     delay(noteDuration);
 
     // stop the waveform generation before the next note.

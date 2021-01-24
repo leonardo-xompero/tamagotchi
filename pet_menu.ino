@@ -489,6 +489,7 @@ void menu_pet_loop()
     buttonTwoState=digitalRead(buttonTwo);
     // check if the state of the button is LOW(is pressed)
     if(buttonTwoState==LOW){
+      beep(NOTE_B5, 125);
       //set the semaphore of the menu to true
       busyMenu=true;
       myScreen.clear(blackColour);

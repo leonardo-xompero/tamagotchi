@@ -1,2 +1,12 @@
-/Debug/
-/Debug__TI/
+Debug/**
+Debug__TI/**
+
+targetConfigs/**
+
+.launches/**
+
+.settings/**
+
+.cssproject
+.cproject
+.project
